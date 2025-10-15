@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Servidor: db
--- Tiempo de generación: 16-09-2020 a las 16:37:17
--- Versión del servidor: 10.5.5-MariaDB-1:10.5.5+maria~focal
--- Versión de PHP: 7.4.9
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -21,36 +12,37 @@ SET time_zone = "+00:00";
 -- Base de datos: `database`
 --
 
+USE database;
+
 -- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarios`
---
-
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
-  `nombre` text NOT NULL
+-- Tabla de usuarios
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL,
+  password VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `usuarios`
---
+-- Insertar usuarios de ejemplo
+INSERT INTO usuarios (nombre, password) VALUES
+('mikel', '$2y$10$examplehashedpassword1'),
+('aitor', '$2y$10$examplehashedpassword2');
 
-INSERT INTO `usuarios` (`id`, `nombre`) VALUES
-(1, 'mikel'),
-(2, 'aitor');
+-- --------------------------------------------------------
+-- Tabla de productos (tienda Labubus aunque puede ser de otra cosa tambien :))
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS productos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  precio DECIMAL(6,2),
+  descripcion TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
-COMMIT;
-
+-- Insertar productos de ejemplo
+INSERT INTO productos (nombre, precio, descripcion) VALUES
+('Camiseta Labubus Original', 19.99, 'Camiseta oficial con el logo de Labubus.'),
+('Taza mágica de Labubus', 12.50, 'Cambia de color al verter líquido caliente.'),
+('Pegatina holográfica Labubus', 3.00, 'Pegatina especial brillante con diseño exclusivo.');
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
