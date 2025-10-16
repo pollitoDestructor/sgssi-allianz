@@ -27,7 +27,9 @@
 
 </div>
     <br>
-    <a href="../index.php">Volver al inicio</a>
+	<form action="../index.php" method="get">
+    	<input type="submit" value="Volver al inicio">
+	</form>
     <br>
 </br>
 
