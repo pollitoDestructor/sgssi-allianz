@@ -21,23 +21,30 @@ if (!$conn) {
 }
 
 // Mostrar productos existentes
-$sql = "SELECT * FROM productos";
+$sql = "SELECT * FROM `catalogo` ";
 $resultado = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($resultado) > 0) {
     echo "<table border='1' cellpadding='5'>";
-    echo "<tr><th>ID</th><th>Producto</th><th>Precio (€)</th><th>Descripción</th></tr>";
+    echo "<tr><th>ID</th><th>Producto</th><th>Precio (€)</th><th>Descripción</th><th>DNI</th></tr>";
 
     while ($row = mysqli_fetch_assoc($resultado)) {
         echo "<tr>";
         echo "<td>{$row['id']}</td>";
         echo "<td>{$row['nombre']}</td>";
         echo "<td>{$row['precio']}</td>";
-        echo "<td>{$row['descripcion']}</td>";
+        echo "<td>{$row['descr']}</td>";
+        echo "<td>{$row['dni']}</td>";
         echo "</tr>";
-    }
-
+    }    
     echo "</table>";
+    
+    $count = "SELECT count(*) as total FROM catalogo";
+    $resultado = mysqli_query($conn, $count);
+    $data = mysqli_fetch_assoc($resultado);
+    $id = $data['total'];
+    echo "Número de elementos = $id.";
+    
 } else {
     echo "<p>No hay productos disponibles.</p>";
 }
@@ -47,9 +54,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre = $_POST['nombre'];
     $precio = $_POST['precio'];
     $descripcion = $_POST['descripcion'];
-
-    $insert = "INSERT INTO productos (nombre, precio, descripcion)
-               VALUES ('$nombre', '$precio', '$descripcion')";
+    $dni = $_POST['dni'];
+    
+    //Calcular ID
+    $count = "SELECT count(*) as total FROM catalogo";
+    $resultado = mysqli_query($conn, $count);
+    $data = mysqli_fetch_assoc($resultado);
+    $id = $data['total'] +1;
+    
+    $insert = "INSERT INTO catalogo (id, nombre, precio, descr, dni)
+               VALUES ('$id', '$nombre', '$precio', '$descripcion','$dni')";
     if (mysqli_query($conn, $insert)) {
         echo "<p> Producto añadido correctamente.</p>";
         // Refrescar la página para mostrar el producto agregado
@@ -67,6 +81,7 @@ mysqli_close($conn);
     Nombre: <input type="text" name="nombre" required><br><br>
     Precio (€): <input type="number" step="0.01" name="precio" required><br><br>
     Descripción: <input type="text" name="descripcion"><br><br>
+    DNI: <input type="text" name="dni"><br><br>
     <input type="submit" value="Añadir producto">
     <input type="reset" value="Borrar">
 </form>
