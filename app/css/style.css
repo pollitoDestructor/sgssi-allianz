@@ -1,0 +1,70 @@
+/* Fondo simple */
+body {
+</br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br> </br>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br> 
+    font-family: Arial, sans-serif;
+    background-color: #F5E0C9;
+    color: black;
+    margin: 0;
+    text-align: center;
+}
+/* Encabezado */
+.content{
+    width:100%;
+    height:110px;
+    background-color: #cadbdb;
+    border:2px solid black;
+}
+.box{
+    width:200px;
+    height:280px;
+    background-color: #cadbdb;
+    margin:30px auto;
+    border:2px solid black;
+}
+h1 {
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 53px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Formularios */
+form {
+    margin-bottom: 10px;
+}
+
+/* Botones simples */
+input[type="submit"] {
+    background-color: #9fc4c6;
+    color: #331E03;
+    border: 1px solid black;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+/* Footer */
+.footer {
+    margin-top: 30px;
+    padding: 30px 0;
+    background-color: #705834;
+    border-top: 2px solid black;
+}
+
+/* Iconos de redes sociales */
+.footer .social-icons img {
+    margin: 0 5px;
+}
+
