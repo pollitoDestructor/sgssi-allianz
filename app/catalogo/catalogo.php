@@ -43,7 +43,7 @@ if (mysqli_num_rows($resultado) > 0) {
     $resultado = mysqli_query($conn, $count);
     $data = mysqli_fetch_assoc($resultado);
     $id = $data['total'];
-    echo "Número de elementos = $id.";
+    echo "Número de elementos = $id";
     
 } else {
     echo "<p>No hay productos disponibles.</p>";
