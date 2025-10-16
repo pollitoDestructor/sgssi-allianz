@@ -33,6 +33,13 @@ body {
     margin:30px auto;
     border:2px solid black;
 }
+.box2{
+    width:400px;
+    height:400px;
+    background-color: #cadbdb;
+    margin:30px auto;
+    border:2px solid black;
+}
 h1 {
     text-transform: uppercase;
     font-family: 'Bebas Neue', sans-serif;
