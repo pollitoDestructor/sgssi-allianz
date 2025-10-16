@@ -1,3 +1,66 @@
+<?php
+  //Activar el manejo de sesiones
+  session_start();
+  // Si ya hay sesión, no dejar volver a logearse (Ni accediendo a través de la URL)
+  if (isset($_SESSION['usuario'])) {
+    header('Location: ../index.php');
+    exit();
+  }
+  // Datos de conexión
+  $hostname = "db";
+  $username = "admin";
+  $password = "test";
+  $db = "database";
+
+  $conn = mysqli_connect($hostname, $username, $password, $db);
+
+  if (!$conn) {
+      die("<center><p style='color:red;'>Error de conexión: " . mysqli_connect_error() . "</p></center>");
+  }
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $nom = $_POST['nombre'];
+      $contra = $_POST['contra'];
+
+      // Consultar usuario
+      $query = "SELECT * FROM usuarios WHERE nombre = '$nom'";
+      $con = mysqli_query($conn, $query) or die(mysqli_error($conn));
+      $row = mysqli_fetch_array($con);
+
+      if ($row) {
+          if (password_verify($contra, $row['contraseña'])) {
+              //Guardar los datos de la sesion
+              $_SESSION['usuario'] = $row['nombre'];
+              $_SESSION['dni'] = $row['dni'];
+              // Redirigir a index.php al iniciar sesión
+       	      header('Location: ../index.php');
+       	      exit();
+          } else {
+              echo "<center><p style='color:red;'><b>Contraseña incorrecta.</b></p></center>";
+          }
+      } else {
+          echo "<center><p style='color:red;'><b>Usuario no encontrado.</b></p></center>";
+      }
+
+      // Mostrar información (como en el original)
+      echo "
+      <center>
+      <table border='1' cellpadding='5'>
+        <tr>
+          <th>ID</th><th>Nombre</th><th>Contraseña</th>
+        </tr>
+        <tr>
+          <td>aaaaa</td>
+          <td>{$row['nombre']}</td>
+          <td>{$row['contraseña']}</td>
+        </tr>
+      </table>
+      </center>";
+  }
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,9 +90,7 @@
 
 </div>
     <br>
-	<form action="../index.php" method="get">
-    	<input type="submit" value="Volver al inicio">
-	</form>
+    <a href="../index.php">Volver al inicio</a>
     <br>
 </br>
 
@@ -55,53 +116,3 @@
 
 </body>
 </html>
-
-<?php
-  // Datos de conexión
-  $hostname = "db";
-  $username = "admin";
-  $password = "test";
-  $db = "database";
-
-  $conn = mysqli_connect($hostname, $username, $password, $db);
-
-  if (!$conn) {
-      die("<center><p style='color:red;'>Error de conexión: " . mysqli_connect_error() . "</p></center>");
-  }
-
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $nom = $_POST['nombre'];
-      $contra = $_POST['contra'];
-
-      // Consultar usuario
-      $query = "SELECT * FROM usuarios WHERE nombre = '$nom'";
-      $con = mysqli_query($conn, $query) or die(mysqli_error($conn));
-      $row = mysqli_fetch_array($con);
-
-      if ($row) {
-          if (password_verify($contra, $row['contraseña'])) {
-              echo "<center><p><b>Inicio de sesión correcto. ¡Bienvenido, $nom!</b></p></center>";
-          } else {
-              echo "<center><p style='color:red;'><b>Contraseña incorrecta.</b></p></center>";
-          }
-      } else {
-          echo "<center><p style='color:red;'><b>Usuario no encontrado.</b></p></center>";
-      }
-
-      // Mostrar información (como en el original)
-      echo "
-      <center>
-      <table border='1' cellpadding='5'>
-        <tr>
-          <th>ID</th><th>Nombre</th><th>Contraseña</th>
-        </tr>
-        <tr>
-          <td>aaaaa</td>
-          <td>{$row['nombre']}</td>
-          <td>{$row['contraseña']}</td>
-        </tr>
-      </table>
-      </center>";
-  }
-?>
-

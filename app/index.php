@@ -1,3 +1,8 @@
+<?php
+// Recuperar datos de la sesion (si no se ha iniciado sesion aun, tambien es util!) 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,22 +24,42 @@
 <div class="box">
 <br>
 </br>
-<!-- Botón para iniciar sesión -->
-<form action="/login/" method="get">
-    <input type="submit" value="Iniciar sesión">
-</form>
-<br>
+<?php
+//Si se ha iniciado sesión, no se muestran los botones de inicio de sesión ni de registro.
+if (!isset($_SESSION['usuario'])) {
+    // Botón para iniciar sesión
+    ?>
+    <form action="/login/" method="get">
+        <input type="submit" value="Iniciar sesión">
+    </form>
+    <br>
 
-<!-- Botón para registrarse -->
-<form action="/register/" method="get">
-    <input type="submit" value="Registrarse">
-</form>
-<br>
+    <!-- Botón para registrarse -->
+    <form action="/register/" method="get">
+        <input type="submit" value="Registrarse">
+    </form>
+    <br>
+    <?php
+} 
+else {
+    // Usuario logueado: mostrar mensaje
+    echo "<p>Bienvenido, " . htmlspecialchars($_SESSION['usuario']) . ".</p>";
+}
+?>
 
 <!-- Botón para ver catálogo -->
 <form action="/catalogo/" method="get">
     <input type="submit" value="Ver catálogo">
 </form>
+<?php if (isset($_SESSION['usuario'])){
+?>
+<form action="/logout/" method="get">
+        <input type="submit" value="Cerrar sesión">
+    </form>
+    <br>
+<?php 
+}
+?>
 </div>
 <!-- Footer con redes sociales -->
 </br>
