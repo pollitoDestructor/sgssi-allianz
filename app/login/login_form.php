@@ -25,16 +25,19 @@
   $conn = mysqli_connect($hostname,$username,$password,$db);
   $nom = $_POST['nombre'];
   $contra = $_POST['contra'];
-$con = mysqli_query($conn, "SELECT * FROM usuarios WHERE id = '$nom'") or die (mysqli_error($conn));
+  
+  $hash = password_hash($contra, PASSWORD_DEFAULT);
+  
+$con = mysqli_query($conn, "SELECT * FROM usuarios WHERE nombre = '$nom'") or die (mysqli_error($conn));
 $row = mysqli_fetch_array($con);
-if ($row['nombre']===$contra){
+if ($row['contraseña']===$hash){
 	echo "bien";
 }
 echo
    "<tr>
    <td>aaaaa</td>
-    <td>{$row['id']}</td>
     <td>{$row['nombre']}</td>
+    <td>{$row['contraseña']}</td>
    </tr>"
 ?>
 	</body>

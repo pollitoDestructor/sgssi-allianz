@@ -38,10 +38,12 @@
 <form action="register_form.php" method="post" onsubmit="return validarFormulario();">
     NOMBRE: <input type="text" id="nombre" name="nombre"><br>
     APELLIDOS: <input type="text" id="apellidos" name="apellidos"><br>
+    DNI: <input type="text" id="dni" name="dni"><br>
+    FECHA de NACIMIENTO: <input type="date" id="fecha_nac" name="fecha_nac"><br>
     TELÉFONO: <input type="text" id="telefono" name="telefono"><br>
     EMAIL: <input type="email" id="email" name="email"><br>
-    PASSWORD: <input type="password" id="contra" name="contra"><br>
-    <input type="submit" value="Registrar">
+    PASSWORD: <input type="password" id="contra" name="contra"><br>  
+    <input type="submit" value="Registrar Usr">
     <input type="reset" value="Borrar"><br><br>
 </form>
 
@@ -66,6 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Obtener y sanitizar datos
     $nombre = mysqli_real_escape_string($conn, $_POST['nombre']);
     $apellidos = mysqli_real_escape_string($conn, $_POST['apellidos']);
+    $dni = mysqli_real_escape_string($conn, $_POST['dni']);
+    $fecha_nac = mysqli_real_escape_string($conn, $_POST['fecha_nac']);
     $telefono = mysqli_real_escape_string($conn, $_POST['telefono']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $contra = $_POST['contra'];
@@ -81,8 +85,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $hash = password_hash($contra, PASSWORD_DEFAULT);
 
         // Insertar el nuevo usuario
-        $sql_insert = "INSERT INTO usuarios (nombre, apellidos, telefono, email, password) 
-                       VALUES ('$nombre', '$apellidos', '$telefono', '$email', '$hash')";
+        $sql_insert = "INSERT INTO usuarios (nombre, apellidos, dni, fecha_nac, telefono, email, contraseña) 
+                       VALUES ('$nombre', '$apellidos', '$dni', '$fecha_nac', '$telefono', '$email', '$hash')";
 
         if (mysqli_query($conn, $sql_insert)) {
             echo "<p>Usuario registrado correctamente.</p>";
