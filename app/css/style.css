@@ -20,6 +20,25 @@ body {
     text-align: center;
 }
 /* Encabezado */
+/* Tarjetas de producto */
+.product-card {
+    display: inline-block;
+    width: 200px;
+    margin: 15px;
+    padding: 10px;
+    border: 2px solid black;
+    background-color: #cadbdb; /* igual que tus boxes */
+    border-radius: 10px;
+    vertical-align: top;
+}
+
+.product-img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+}
+
 .content{
     width:100%;
     height:110px;
