@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Detalle del item</title>
+    <title>Allianz - Info item</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
