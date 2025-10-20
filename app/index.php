@@ -14,26 +14,27 @@ session_start();
 <body>
 <br>
 </br>
+
 <div class="content">
 <h1>Allianz Labubu</h1>
 </div>
 <br>
-</br>
-<br>
 </br> </br>
 <div class="box">
-<br>
-</br>
+
 <?php
 //Si se ha iniciado sesión, no se muestran los botones de inicio de sesión ni de registro.
 if (!isset($_SESSION['usuario'])) {
+
     // Botón para iniciar sesión
     ?>
+    <br>
+</br>
+</br>
     <form action="/login/" method="get">
         <input type="submit" value="Iniciar sesión">
     </form>
     <br>
-
     <!-- Botón para registrarse -->
     <form action="/register/" method="get">
         <input type="submit" value="Registrarse">
@@ -43,25 +44,36 @@ if (!isset($_SESSION['usuario'])) {
 } 
 else {
     // Usuario logueado: mostrar mensaje
-    echo "<p>Bienvenido, " . htmlspecialchars($_SESSION['usuario']) . ".</p>";
+    
+    echo "<br></br> <p>Bienvenido, " . htmlspecialchars($_SESSION['usuario']) . ".</p>";
 }
 ?>
 
-<!-- Botón para ver catálogo -->
+
+<?php if (isset($_SESSION['usuario'])){
+?>
+    <!-- Botón para ver catálogo -->
 <form action="/catalogo/" method="get">
     <input type="submit" value="Ver catálogo">
 </form>
-<?php if (isset($_SESSION['usuario'])){
-?>
+    <!-- Botón para Modificar datos -->
+<form action="/modificar/" method="get">
+    <input type="submit" value="Modificar Datos">
+</form>
+    <!-- Botón para cerrar sesión -->
 <form action="/logout/" method="get">
         <input type="submit" value="Cerrar sesión">
     </form>
     <br>
+
 <?php 
 }
 ?>
 </div>
 <!-- Footer con redes sociales -->
+</br>
+<br>
+</br>
 </br>
 <br>
 </br>
