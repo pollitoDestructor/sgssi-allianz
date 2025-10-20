@@ -1,12 +1,28 @@
 <?php
   //Comprobación de la sesión
   session_start();
-  // Si ya hay sesión, no dejar registrarse
+  // Si no hay sesion iniciada, te redirige al login
   if (!isset($_SESSION['usuario'])) {
-    header('Location: ../index.php');
+    header('Location: /login/');
     exit();
   }
-  
+  // Si no hay parámetro GET "user", redirige automáticamente con el DNI de sesión.
+  if (!isset($_GET['user'])) {
+    $dni = $_SESSION['dni'];
+    header("Location: /modify_user?user=" . urlencode($dni));
+    exit;
+  }
+  // Si el parametro GET "user" es distinto al DNI del usuario actual, redirige al inicio. No se tiene permiso para modificar a esa información.
+  if ($_GET['user']!=$_SESSION['dni']) {
+    $dni = $_SESSION['dni'];
+    header("Location: /login/login_form.php");
+    exit;
+  }
+
+//Guardar datos reales del dni
+  if (isset($_GET['user'])) {
+    $dni = $_GET['user'];
+  }
 // Datos de conexión
 $hostname = "db";
 $username = "admin";
@@ -21,8 +37,7 @@ if (!$conn) {
 }
 
 // Consultar usuario
-      $dniuser = $_SESSION['dni'];
-      $query = "SELECT * FROM usuarios WHERE dni = '$dniuser'";
+      $query = "SELECT * FROM usuarios WHERE dni ='$dni'";
       $con = mysqli_query($conn, $query) or die(mysqli_error($conn));
       $row = mysqli_fetch_array($con);
 	
