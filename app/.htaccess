@@ -1,0 +1,12 @@
+RewriteEngine On
+
+#detecta que quieres hacer algo con un item
+RewriteCond %{QUERY_STRING} ^item={(.*)}$ 
+
+RewriteRule ^show_item$ catalogo/item\.php?id=%1 [L]
+
+
+#detecta que quieres hacer algo con un usuario
+RewriteCond %{QUERY_STRING} ^user={(.*)}$ 
+
+RewriteRule ^modify_user$ modificar_form/user_modify_form\.php?id=%1 [L]
