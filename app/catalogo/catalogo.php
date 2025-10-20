@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Catálogo - Tienda Labubus ;)</title>
+    <title>Allianz - Catálogo</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -36,7 +36,6 @@
         //redireccionar a los items
         echo "<h3><a href='item.php?id={$row['id']}' style='text-decoration: underline; color: blue;'>{$row['nombre']}</a></h3>";
         echo "<p>Precio: {$row['precio']} €</p>";
-        echo "<p>{$row['descr']}</p>";
         echo "</div>";
     }
 
@@ -54,18 +53,12 @@
     // Si se envía el formulario, agregar nuevo producto
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $nombre = $_POST['nombre'];
-        $precio = $_POST['precio'];
+        $color = $_POST['color'];
         $descripcion = $_POST['descripcion'];
-        $dni = $_POST['dni'];
+        $precio = $_POST['precio'];
 
-        // Calcular ID
-        $count = "SELECT count(*) as total FROM catalogo";
-        $resultado = mysqli_query($conn, $count);
-        $data = mysqli_fetch_assoc($resultado);
-        $id = $data['total'] + 1;
-
-        $insert = "INSERT INTO catalogo (id, nombre, precio, descr, dni)
-                   VALUES ('$id', '$nombre', '$precio', '$descripcion', '$dni')";
+        $insert = "INSERT INTO catalogo (nombre, color, descr, precio)
+                   VALUES ('$nombre', '$color', '$descripcion', '$precio')";
         if (mysqli_query($conn, $insert)) {
             echo "<p>Producto añadido correctamente.</p>";
             echo "<meta http-equiv='refresh' content='0'>";
@@ -80,9 +73,9 @@
     <h3>Añadir nuevo producto</h3>
     <form method="post" action="">
         Nombre: <input type="text" name="nombre" required><br><br>
-        Precio (€): <input type="number" step="0.01" name="precio" required><br><br>
+        Color: <input type="number" step="0.01" name="precio" required><br><br>
         Descripción: <input type="text" name="descripcion"><br><br>
-        DNI: <input type="text" name="dni"><br><br>
+        Precio (€): <input type="text" name="dni"><br><br>
         <input type="submit" value="Añadir producto">
         <input type="reset" value="Borrar">
     </form>

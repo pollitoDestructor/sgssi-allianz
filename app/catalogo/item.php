@@ -33,9 +33,9 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
 
     echo "<h2>{$row['nombre']}</h2>";
     echo "<img src='{$imagen}' alt='{$row['nombre']}' class='product-img'>";
-    echo "<p>Precio: {$row['precio']} €</p>";
+    echo "<p>Color: {$row['color']}</p>";
     echo "<p>Descripción: {$row['descr']}</p>";
-    echo "<p>DNI asociado: {$row['dni']}</p>";
+    echo "<p>Precio: {$row['precio']} €</p>";
 } else {
     echo "<p>Item no encontrado.</p>";
 }
