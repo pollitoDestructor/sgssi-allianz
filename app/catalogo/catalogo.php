@@ -75,9 +75,8 @@
         Nombre: <input type="text" name="nombre" required><br><br>
         Color: <input type="text" name="color" required><br><br>
         Descripción: <input type="text" name="descripcion" required><br><br>
-        Precio (€): <input type="number" step="0.01" name="precio" required><br><br>
+        Precio (€): <input type="number" step="0.01" name="precio" required placeholder="0 - 999.99"><br><br>
         <input type="submit" value="Añadir producto">
-        <input type="reset" value="Borrar">
     </form>
 
     <br>

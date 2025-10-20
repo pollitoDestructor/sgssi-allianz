@@ -23,6 +23,12 @@ if (!$conn) {
 // Obtener el id desde la URL, el que pasa catalogo
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
+// Eliminar labubus
+if (isset($_POST['borrar'])) {
+    $id = intval($_GET['id']);  // toma el id desde la URL
+    mysqli_query($conn, "DELETE FROM catalogo WHERE id = $id");
+}
+
 // Consultar el item en la bd
 $sql = "SELECT * FROM catalogo WHERE id = $id";
 $resultado = mysqli_query($conn, $sql);
@@ -47,6 +53,11 @@ mysqli_close($conn);
 
 <br>
 <br></br>
+<form method="post" onsubmit="return confirm('¿Quieres borrar este item?');">
+    <input type="submit" name="borrar" value="Borrar">
+</form>
+</form>
+
 <form action="catalogo.php" method="get">
     <input type="submit" value="Volver al catálogo">
 </form>
