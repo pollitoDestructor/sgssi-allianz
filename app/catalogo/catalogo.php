@@ -73,9 +73,9 @@
     <h3>Añadir nuevo producto</h3>
     <form method="post" action="">
         Nombre: <input type="text" name="nombre" required><br><br>
-        Color: <input type="number" step="0.01" name="precio" required><br><br>
+        Color: <input type="text" name="color"><br><br>
         Descripción: <input type="text" name="descripcion"><br><br>
-        Precio (€): <input type="text" name="dni"><br><br>
+        Precio (€): <input type="number" step="0.01" name="precio" required><br><br>
         <input type="submit" value="Añadir producto">
         <input type="reset" value="Borrar">
     </form>
