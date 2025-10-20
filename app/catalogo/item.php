@@ -56,7 +56,6 @@ mysqli_close($conn);
 <form method="post" onsubmit="return confirm('¿Quieres borrar este item?');">
     <input type="submit" name="borrar" value="Borrar">
 </form>
-</form>
 
 <form action="catalogo.php" method="get">
     <input type="submit" value="Volver al catálogo">
