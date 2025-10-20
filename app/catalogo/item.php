@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Allianz - Info item</title>
+    <title>Allianz Labubu - Info item</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -32,6 +32,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     $imagen = "../img/" . $row['nombre'] . ".jpg";
 
     echo "<h2>{$row['nombre']}</h2>";
+    echo "<div class='product-card'>";
     echo "<img src='{$imagen}' alt='{$row['nombre']}' class='product-img'>";
     echo "<p>Color: {$row['color']}</p>";
     echo "<p>Descripción: {$row['descr']}</p>";
@@ -39,15 +40,35 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
 } else {
     echo "<p>Item no encontrado.</p>";
 }
-
+        echo "</div>";
+        
 mysqli_close($conn);
 ?>
 
 <br>
+<br></br>
 <form action="catalogo.php" method="get">
     <input type="submit" value="Volver al catálogo">
 </form>
+<br><br><br><br>
 
+<footer class="footer">
+    <center>
+        <hr size="2" color="black">
+        <p>Contacto y redes sociales:</p>
+        <div class="social-icons">
+            <a href="https://x.com/allianzlabubu">
+                <img src="../img/twitter.png" width="50" height="50" alt="Twitter">
+            </a>
+            <a href="https://www.instagram.com/allianzlabubu/">
+                <img src="../img/insta.png" width="50" height="50" alt="Instagram">
+            </a>
+            <a href="https://www.tiktok.com/@allianzlabubu?lang=es">
+                <img src="../img/TikTok.png" width="50" height="50" alt="TikTok">
+            </a>
+        </div>
+    </center>
+</footer>
 </body>
 </html>
 

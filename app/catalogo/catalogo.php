@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Allianz - Catálogo</title>
+    <title>Allianz Labubu - Catálogo</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -73,8 +73,8 @@
     <h3>Añadir nuevo producto</h3>
     <form method="post" action="">
         Nombre: <input type="text" name="nombre" required><br><br>
-        Color: <input type="text" name="color"><br><br>
-        Descripción: <input type="text" name="descripcion"><br><br>
+        Color: <input type="text" name="color" required><br><br>
+        Descripción: <input type="text" name="descripcion" required><br><br>
         Precio (€): <input type="number" step="0.01" name="precio" required><br><br>
         <input type="submit" value="Añadir producto">
         <input type="reset" value="Borrar">
@@ -84,7 +84,25 @@
    <form action="../index.php" method="get">
     	<input type="submit" value="Volver al inicio">
     </form>
+<br><br><br><br>
 
+<footer class="footer">
+    <center>
+        <hr size="2" color="black">
+        <p>Contacto y redes sociales:</p>
+        <div class="social-icons">
+            <a href="https://x.com/allianzlabubu">
+                <img src="../img/twitter.png" width="50" height="50" alt="Twitter">
+            </a>
+            <a href="https://www.instagram.com/allianzlabubu/">
+                <img src="../img/insta.png" width="50" height="50" alt="Instagram">
+            </a>
+            <a href="https://www.tiktok.com/@allianzlabubu?lang=es">
+                <img src="../img/TikTok.png" width="50" height="50" alt="TikTok">
+            </a>
+        </div>
+    </center>
+</footer>
 </body>
 </html>
 
