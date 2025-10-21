@@ -68,7 +68,7 @@ mysqli_close($conn);
 
 <br>
 <br></br>
-<form method="post" onsubmit="confirm('¿Quieres editar este item?');">
+<form method="post" onsubmit="return confirm('¿Quieres editar este item?');">
         <label for="nombre"><b>Nombre:</b></label><br>
         <input type="text" id="nombre" name="nombre" required><br><br>
 
