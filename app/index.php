@@ -30,7 +30,6 @@ if (!isset($_SESSION['usuario'])) {
     ?>
     <br>
 </br>
-</br>
     <form action="/login/" method="get">
         <input type="submit" value="Iniciar sesión">
     </form>
