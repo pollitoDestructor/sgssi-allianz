@@ -29,6 +29,21 @@ if (isset($_POST['borrar'])) {
     mysqli_query($conn, "DELETE FROM catalogo WHERE id = $id");
 }
 
+//Editar labubus
+if (isset($_POST['editar'])) {
+	$id = intval($_GET['id']);
+	$nombre = $_POST['nombre'];
+	$color = $_POST['color'];
+	$descr = $_POST['descr'];
+	$precio = $_POST['precio'];
+	$sql_update = "UPDATE catalogo SET nombre = '$nombre', color = '$color', descr = '$descr', precio = '$precio' WHERE id = '$id'";
+	if (mysqli_query($conn, $sql_update)) {
+        echo "<center><p><b>Datos modificados correctamente.</b></p></center>";
+	} else {
+        echo "<center><p style='color:red;'><b>Error al registrar: " . mysqli_error($conn) . "</b></p></center>";
+    }
+}
+
 // Consultar el item en la bd
 $sql = "SELECT * FROM catalogo WHERE id = $id";
 $resultado = mysqli_query($conn, $sql);
@@ -53,6 +68,21 @@ mysqli_close($conn);
 
 <br>
 <br></br>
+<form method="post" onsubmit="confirm('¿Quieres editar este item?');">
+        <label for="nombre"><b>Nombre:</b></label><br>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="color"><b>Color:</b></label><br>
+        <input type="text" id="color" name="color" required><br><br>
+
+        <label for="descr"><b>Descripción:</b></label><br>
+        <input type="text" id="descr" name="descr" required><br><br>
+
+        <label for="precio"><b>Precio (€):</b></label><br>
+        <input type="number" step="0.01" name="precio" required placeholder="0 - 999.99"><br><br>
+        <input type="submit" name="editar" value="Modificar item">
+</form>
+
 <form method="post" onsubmit="return confirm('¿Quieres borrar este item?');">
     <input type="submit" name="borrar" value="Borrar">
 </form>
