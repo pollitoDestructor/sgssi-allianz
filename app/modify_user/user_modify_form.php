@@ -1,28 +1,35 @@
 <?php
-  //Comprobación de la sesión
-  session_start();
-  // Si no hay sesion iniciada, te redirige al login
-  if (!isset($_SESSION['usuario'])) {
+//Comprobación de la sesión
+session_start();
+// Si no hay sesion iniciada, te redirige al login
+if (!isset($_SESSION['usuario']) && $_SERVER["REQUEST_METHOD"] !== "POST") {
     header('Location: /login/');
     exit();
-  }
-  // Si no hay parámetro GET "user", redirige automáticamente con el DNI de sesión.
-  if (!isset($_GET['user'])) {
+}
+// Si no hay parámetro GET "user", redirige automáticamente con el DNI de sesión.
+if (!isset($_GET['user']) && $_SERVER["REQUEST_METHOD"] !== "POST") {
     $dni = $_SESSION['dni'];
     header("Location: /modify_user?user=" . urlencode($dni));
     exit;
-  }
-  // Si el parametro GET "user" es distinto al DNI del usuario actual, redirige al inicio. No se tiene permiso para modificar a esa información.
-  if ($_GET['user']!=$_SESSION['dni']) {
-    $dni = $_SESSION['dni'];
-    header("Location: /login/login_form.php");
+}
+// Si el parametro GET "user" es distinto al DNI del usuario actual, redirige al inicio. No se tiene permiso para modificar a esa información.
+if (isset($_GET['user']) && $_GET['user'] != $_SESSION['dni'] && $_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("Location: /");
     exit;
-  }
-
-//Guardar datos reales del dni
-  if (isset($_GET['user'])) {
+}
+// Determinar el DNI a usar
+if (isset($_GET['user'])) {
     $dni = $_GET['user'];
-  }
+} else {
+    $dni = $_SESSION['dni'];
+}
+
+// Comprobación de permisos
+if ($dni !== $_SESSION['dni'] && $_SERVER["REQUEST_METHOD"] !== "POST") {
+    // El usuario intenta modificar otro perfil: redirigimos
+    header("Location: /");
+    exit;
+}
 // Datos de conexión
 $hostname = "db";
 $username = "admin";
@@ -36,7 +43,7 @@ if (!$conn) {
     die("<center><p style='color:red;'>Error de conexión: " . mysqli_connect_error() . "</p></center>");
 }
 
-// Consultar usuario
+      // Consultar usuario
       $query = "SELECT * FROM usuarios WHERE dni ='$dni'";
       $con = mysqli_query($conn, $query) or die(mysqli_error($conn));
       $row = mysqli_fetch_array($con);
@@ -59,20 +66,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $telefono = mysqli_real_escape_string($conn, $_POST['telefono']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
 
-        // Edita el usuario
-        $sql_update = "UPDATE usuarios SET nombre = '$nombre', apellidos = '$apellidos', dni = '$dni', fecha_nac = '$fecha_nac', telefono = '$telefono', email = '$email' WHERE dni = '$dniUS'";
-        
+    // Edita el usuario
+    $sql_update = "UPDATE usuarios SET nombre = '$nombre', apellidos = '$apellidos', dni = '$dni', fecha_nac = '$fecha_nac', telefono = '$telefono', email = '$email' WHERE dni = '$dniUS'";
+    if (mysqli_query($conn, $sql_update)) {
+        echo "<center><p><b>Datos modificados correctamente.</b></p></center>";
         $_SESSION['usuario'] = $nombre; //Actualizar los datos de sesión
         $_SESSION['dni'] = $dni;
-
-        if (mysqli_query($conn, $sql_update)) {
-            echo "<center><p><b>Datos modificados correctamente.</b></p></center>";
-        } else {
-            echo "<center><p style='color:red;'><b>Error al registrar: " . mysqli_error($conn) . "</b></p></center>";
-        }
-    
+        // Consultar usuario (con datos actualizados)
+	$query = "SELECT * FROM usuarios WHERE dni ='$dni'";
+	$con = mysqli_query($conn, $query) or die(mysqli_error($conn));
+	$row = mysqli_fetch_array($con);
+	// Atributos del US (usuario sesión) actualizado
+	$nombreUS = $row['nombre'];
+	$apellidosUS = $row['apellidos'];
+	$dniUS = $row['dni'];
+	$fecha_nacUS = $row['fecha_nac'];
+	$telefonoUS = $row['telefono'];
+	$emailUS = $row['email'];
+    } else {
+        echo "<center><p style='color:red;'><b>Error al registrar: " . mysqli_error($conn) . "</b></p></center>";
+    }
 }
-
 // Cerrar conexión
 mysqli_close($conn);
 ?>
@@ -137,7 +151,7 @@ mysqli_close($conn);
 <div class="box3">
     <h2>Modificar datos del usuario</h2>
     <br>
-    <form action="user_modify_form.php" method="post" onsubmit="return validarFormulario();">
+    <form action="/modify_user/user_modify_form.php" method="post" onsubmit="return validarFormulario();">
         <label for="nombre"><b>Nombre:</b></label><br>
         <input type="text" id="nombre" name="nombre" value="<?= $nombreUS ?>" required><br><br>
 
