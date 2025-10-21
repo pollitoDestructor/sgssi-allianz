@@ -39,7 +39,7 @@ if (isset($_POST['editar'])) {
 	$precio = $_POST['precio'];
 	$sql_update = "UPDATE catalogo SET nombre = '$nombre', color = '$color', estado = '$estado', descr = '$descr', precio = '$precio' WHERE id = '$id'";
 	if (mysqli_query($conn, $sql_update)) {
-        echo "<center><p><b>Datos modificados correctamente.</b></p></center>";
+        echo "<script>alert('Datos modificados correctamente.');</script>";
 	} else {
         echo "<center><p style='color:red;'><b>Error al registrar: " . mysqli_error($conn) . "</b></p></center>";
     }
@@ -70,19 +70,37 @@ mysqli_close($conn);
 
 <br>
 <br></br>
+<form method="post" onsubmit="return confirm('¿Quieres editar este item?');">
+        <label for="nombre"><b>Nombre:</b></label><br>
+        <input type="text" id="nombre" name="nombre" value="<?= $row['nombre'] ?>" required><br><br>
 
-<form action="../modify_item" method="get">
+        <label for="color"><b>Color:</b></label><br>
+        <input type="text" id="color" name="color" value="<?= $row['color'] ?>" required><br><br>
+        
+        <label for="estado"><b>Estado:</b></label><br>
+	<select id="estado" name="estado" required>
+		<option value="">Selecciona un estado</option>
+		<option value="nuevo">Nuevo</option>
+		<option value="usado">Usado</option>
+		<option value="defectuoso">Defectuoso</option>
+	</select><br><br>
+	<script>
+    	document.getElementById('estado').value = "<?= $row['estado'] ?>";
+	</script>
+
+        <label for="descr"><b>Descripción:</b></label><br>
+        <input type="text" id="descr" name="descr" value="<?= $row['descr'] ?>" required><br><br>
+
+        <label for="precio"><b>Precio (€):</b></label><br>
+        <input type="number" step="0.01" name="precio" value="<?= $row['precio'] ?>" required placeholder="0 - 999.99"><br><br>
+        <input type="submit" name="editar" value="Modificar item">
+</form>
+
+<form action="../items/item.php" method="get" onsubmit="return confirm('¿Quieres cancelar los cambios y volver atrás?')">
     <input type="hidden" name="id" value="<?php echo $id; ?>">
-    <input type="submit" value="Modificar item">
+    <input type="submit" value="Cancelar">
 </form>
 
-<form method="post" onsubmit="return confirm('¿Quieres borrar este item?');">
-    <input type="submit" name="borrar" value="Borrar">
-</form>
-
-<form action="catalogo.php" method="get">
-    <input type="submit" value="Volver al catálogo">
-</form>
 <br><br><br><br>
 
 <footer class="footer">
