@@ -15,21 +15,15 @@
 
 #### Docker
 
-Antes de comenzar, asegúrate de tener instalado:
-
-- [Docker](https://docs.docker.com/get-docker/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-
-Puedes verificar que están instalados con:
+Antes de comenzar, hay que asegurarse de tener Docker instalado:
 
 ```bash
-docker -v
-docker-compose -v
+sudo apt install docker
 ```
 
 #### Repositorio
 
-Asimismo, descargamos el repositorio con:
+Asimismo, se descarga el repositorio con:
 
 ```bash
 git clone -b entrega_1 https://github.com/pollitoDestructor/sgssi-allianz.git
