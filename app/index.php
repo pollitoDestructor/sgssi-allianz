@@ -51,7 +51,7 @@ else {
 <?php if (isset($_SESSION['usuario'])){
 ?>
     <!-- Botón para ver catálogo -->
-<form action="/catalogo/" method="get">
+<form action="/items/" method="get">
     <input type="submit" value="Ver catálogo">
 </form>
 <!-- Botón para ver los datos -->
