@@ -70,11 +70,12 @@ if (!isset($_GET['user']) && $_SERVER["REQUEST_METHOD"] !== "POST") {
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $nombre = $_POST['nombre'];
         $color = $_POST['color'];
+        $estado = $_POST['estado'];
         $descripcion = $_POST['descripcion'];
         $precio = $_POST['precio'];
 
-        $insert = "INSERT INTO catalogo (nombre, color, descr, precio)
-                   VALUES ('$nombre', '$color', '$descripcion', '$precio')";
+        $insert = "INSERT INTO catalogo (nombre, color, estado, descr, precio)
+                   VALUES ('$nombre', '$color', '$estado', '$descripcion', '$precio')";
         if (mysqli_query($conn, $insert)) {
             echo "<p>Producto añadido correctamente.</p>";
             echo "<meta http-equiv='refresh' content='0'>";
@@ -90,6 +91,13 @@ if (!isset($_GET['user']) && $_SERVER["REQUEST_METHOD"] !== "POST") {
     <form method="post" action="">
         Nombre: <input type="text" name="nombre" required><br><br>
         Color: <input type="text" name="color" required><br><br>
+        <label for="estado">Estado:</label>
+	<select id="estado" name="estado" required>
+		<option value="">Selecciona un estado</option>
+		<option value="nuevo">Nuevo</option>
+		<option value="usado">Usado</option>
+		<option value="defectuoso">Defectuoso</option>
+	</select><br><br>
         Descripción: <input type="text" name="descripcion" required><br><br>
         Precio (€): <input type="number" step="0.01" name="precio" required placeholder="0 - 999.99"><br><br>
         <input type="submit" value="Añadir producto">

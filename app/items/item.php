@@ -34,9 +34,10 @@ if (isset($_POST['editar'])) {
 	$id = intval($_GET['id']);
 	$nombre = $_POST['nombre'];
 	$color = $_POST['color'];
+	$estado = $_POST['estado'];
 	$descr = $_POST['descr'];
 	$precio = $_POST['precio'];
-	$sql_update = "UPDATE catalogo SET nombre = '$nombre', color = '$color', descr = '$descr', precio = '$precio' WHERE id = '$id'";
+	$sql_update = "UPDATE catalogo SET nombre = '$nombre', color = '$color', estado = '$estado', descr = '$descr', precio = '$precio' WHERE id = '$id'";
 	if (mysqli_query($conn, $sql_update)) {
         echo "<center><p><b>Datos modificados correctamente.</b></p></center>";
 	} else {
@@ -56,6 +57,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     echo "<div class='product-card'>";
     echo "<img src='{$imagen}' alt='{$row['nombre']}' class='product-img'>";
     echo "<p>Color: {$row['color']}</p>";
+    echo "<p>Estado: {$row['estado']}</p>";
     echo "<p>Descripción: {$row['descr']}</p>";
     echo "<p>Precio: {$row['precio']} €</p>";
 } else {
@@ -74,6 +76,14 @@ mysqli_close($conn);
 
         <label for="color"><b>Color:</b></label><br>
         <input type="text" id="color" name="color" required><br><br>
+        
+        <label for="estado"><b>Estado:</b></label><br>
+	<select id="estado" name="estado" required>
+		<option value="">Selecciona un estado</option>
+		<option value="nuevo">Nuevo</option>
+		<option value="usado">Usado</option>
+		<option value="defectuoso">Defectuoso</option>
+	</select><br><br>
 
         <label for="descr"><b>Descripción:</b></label><br>
         <input type="text" id="descr" name="descr" required><br><br>
