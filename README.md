@@ -1,19 +1,52 @@
+# Proyecto Allianz Labubu
 
-# Docker LAMP
-Linux + Apache + MariaDB (MySQL) + PHP 7.2 on Docker Compose. Mod_rewrite enabled by default.
+## Integrantes del grupo
 
-## Instructions
+- Shaman Alonso Amezcua
+- Marcos Cobo Gutiérrez
+- Alexander Díez Ortuzar 
+- Gabriel Gutiérrez Portal
+- Aritz de la Pinta Morales
+- Keneth Sebastián Campos
 
-Enter the following command to start your containers:
+## Despliegue del proyecto con Docker Compose
+
+### Requisitos previos
+
+#### Docker
+
+Antes de comenzar, asegúrate de tener instalado:
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+Puedes verificar que están instalados con:
+
 ```bash
-$ docker-compose up -d
+docker -v
+docker-compose -v
 ```
 
-To stop them, use this:
+#### Repositorio
+
+Asimismo, descargamos el repositorio con:
+
 ```bash
-$ docker-compose stop
+git clone -b entrega_1 https://github.com/pollitoDestructor/sgssi-allianz.git
 ```
 
-Feel free to make pull requests and help to improve this.
+### Ejecutar y detener el proyecto
 
-If you are looking for phpMyAdmin, take a look at [this](https://github.com/celsocelante/docker-lamp/issues/2).
+#### Ejecutarlo
+
+Hay que hacer uso del "docker-compose.yml" con:
+
+```bash
+docker-compose up
+```
+
+#### Detenerlo
+
+```bash
+docker-compose down
+```
