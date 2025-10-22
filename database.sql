@@ -1,3 +1,12 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.2
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: db
+-- Tiempo de generación: 22-10-2025 a las 08:43:22
+-- Versión del servidor: 10.8.2-MariaDB-1:10.8.2+maria~focal
+-- Versión de PHP: 8.2.27
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -12,37 +21,82 @@ SET time_zone = "+00:00";
 -- Base de datos: `database`
 --
 
-USE database;
+-- --------------------------------------------------------
 
--- --------------------------------------------------------
--- Tabla de usuarios
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS usuarios (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL,
-  password VARCHAR(255) NOT NULL
+--
+-- Estructura de tabla para la tabla `catalogo`
+--
+
+CREATE TABLE `catalogo` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `color` varchar(30) NOT NULL,
+  `estado` varchar(30) NOT NULL,
+  `descr` text NOT NULL COMMENT 'Descripción',
+  `precio` decimal(5,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Insertar usuarios de ejemplo
-INSERT INTO usuarios (nombre, password) VALUES
-('mikel', '$2y$10$examplehashedpassword1'),
-('aitor', '$2y$10$examplehashedpassword2');
+--
+-- Volcado de datos para la tabla `catalogo`
+--
+
+INSERT INTO `catalogo` (`id`, `nombre`, `color`, `estado`, `descr`, `precio`) VALUES
+(1, 'labubu', 'multicolor', 'nuevo', '24k labubu', 9.99),
+(2, 'camiseta', 'negro', 'nuevo', 'camiseta labubu', 19.99),
+(3, 'cuaderno', 'blanco y marrón', 'usado', 'cuaderno labubu', 7.50),
+(4, 'pegatina', 'gris', 'nuevo', 'pegatina labubu', 3.25),
+(5, 'taza', 'verde', 'defectuoso', 'taza labubu con asa rota', 5.00);
 
 -- --------------------------------------------------------
--- Tabla de productos (tienda Labubus aunque puede ser de otra cosa tambien :))
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS productos (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(100) NOT NULL,
-  precio DECIMAL(6,2),
-  descripcion TEXT
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `dni` varchar(9) NOT NULL,
+  `nombre` text NOT NULL,
+  `apellidos` text NOT NULL,
+  `fecha_nac` date NOT NULL COMMENT 'Fecha de nacimiento',
+  `email` varchar(100) NOT NULL,
+  `telefono` int(9) NOT NULL,
+  `contraseña` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Insertar productos de ejemplo
-INSERT INTO productos (nombre, precio, descripcion) VALUES
-('Camiseta Labubus Original', 19.99, 'Camiseta oficial con el logo de Labubus.'),
-('Taza mágica de Labubus', 12.50, 'Cambia de color al verter líquido caliente.'),
-('Pegatina holográfica Labubus', 3.00, 'Pegatina especial brillante con diseño exclusivo.');
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`dni`, `nombre`, `apellidos`, `fecha_nac`, `email`, `telefono`, `contraseña`) VALUES
+('12345678Z', 'admin', '.', '1999-01-01', 'admin@gmail.com', 666666666, '$2y$10$w5rT8BbskJ40K2PYy7xxT.T9.3FBvziX9Duyn83hpJXmE4NFLfy2e');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `catalogo`
+--
+ALTER TABLE `catalogo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`dni`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `catalogo`
+--
+ALTER TABLE `catalogo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
