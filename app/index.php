@@ -15,12 +15,7 @@ session_start();
 <br>
 </br>
 
-<div class="content">
-<h1>Allianz Labubu</h1>
-</div>
-<br>
-</br> </br>
-<div class="box">
+<?php include_once('header_and_footer/header.php'); ?>
 
 <?php
 //Si se ha iniciado sesión, no se muestran los botones de inicio de sesión ni de registro.
@@ -85,23 +80,7 @@ else {
 </br>
 <br>
 </br>
-<footer class="footer">
-    <center>
-        <hr size="2" color="black">
-        <p>Contacto y redes sociales:</p>
-        <div class="social-icons">
-            <a href="https://x.com/allianzlabubu">
-                <img src="img/twitter.png" width="50" height="50" alt="Twitter">
-            </a>
-            <a href="https://www.instagram.com/allianzlabubu/">
-                <img src="img/insta.png" width="50" height="50" alt="Instagram">
-            </a>
-            <a href="https://www.tiktok.com/@allianzlabubu?lang=es">
-                <img src="img/TikTok.png" width="50" height="50" alt="TikTok">
-            </a>
-        </div>
-    </center>
-</footer>
+<?php include_once('header_and_footer/footer.php'); //Para el footer  ?>
 
 </body>
 </html>
