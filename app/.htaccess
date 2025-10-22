@@ -6,7 +6,11 @@ RewriteRule ^modify_item$ modify_item/?id=%1 [L]
 RewriteCond %{QUERY_STRING} ^item={(.*)}$ 
 RewriteRule ^show_item$ items/item\.php?id=%1 [L]
 
-# Detecta delete_item?item=x
+# Detecta show_item)item={x}
+RewriteCond %{QUERY_STRING} ^item={(.*)}$
+RewriteRule ^show_item$ show_item/?id=%1 [L]
+
+# Detecta delete_item?item={x}
 RewriteCond %{QUERY_STRING} ^item=(.*)$
 RewriteRule ^delete_item$ delete_item/delete_item_form\.php?id=%1 [L]
 

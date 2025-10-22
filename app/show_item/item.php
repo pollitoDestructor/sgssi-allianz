@@ -80,7 +80,7 @@ mysqli_close($conn);
     <input type="submit" value="Borrar item">
 </form>
 
-<form action="catalogo.php" method="get">
+<form action="../items" method="get">
     <input type="submit" value="Volver al catálogo">
 </form>
 <br><br><br><br>

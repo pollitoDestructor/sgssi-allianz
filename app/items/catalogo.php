@@ -50,7 +50,7 @@ if (!isset($_GET['user']) && $_SERVER["REQUEST_METHOD"] !== "POST") {
         echo "<div class='product-card'>";
         echo "<img src='{$imagen}' alt='{$row['nombre']}' class='product-img'>";
         //redireccionar a los items
-        echo "<h3><a href='item.php?id={$row['id']}' style='text-decoration: underline; color: blue;'>{$row['nombre']}</a></h3>";
+        echo "<h3><a href='../show_item?id={$row['id']}' style='text-decoration: underline; color: blue;'>{$row['nombre']}</a></h3>";
         echo "<p>Precio: {$row['precio']} €</p>";
         echo "</div>";
     }

@@ -39,7 +39,7 @@ if (isset($_POST['editar'])) {
 	$precio = $_POST['precio'];
 	$sql_update = "UPDATE catalogo SET nombre = '$nombre', color = '$color', estado = '$estado', descr = '$descr', precio = '$precio' WHERE id = '$id'";
 	if (mysqli_query($conn, $sql_update)) {
-	echo "<script>alert('Datos modificados correctamente.'); window.location.href='../items/item.php?id={$id}';</script>"; // Para volver tras modificar al catalogo #TODO
+	echo "<script>alert('Datos modificados correctamente.'); window.location.href='../show_item?id={$id}';</script>"; // Para volver tras modificar al catalogo #TODO
     	exit;
 	} else {
         echo "<center><p style='color:red;'><b>Error al registrar: " . mysqli_error($conn) . "</b></p></center>";
@@ -97,7 +97,7 @@ mysqli_close($conn);
         <input type="submit" name="editar" value="Modificar item">
 </form>
 
-<form action="../items/item.php" method="get" onsubmit="return confirm('¿Quieres cancelar los cambios y volver atrás?')">
+<form action="../show_item" method="get" onsubmit="return confirm('¿Quieres cancelar los cambios y volver atrás?')">
     <input type="hidden" name="id" value="<?php echo $id; ?>">
     <input type="submit" value="Cancelar">
 </form>
