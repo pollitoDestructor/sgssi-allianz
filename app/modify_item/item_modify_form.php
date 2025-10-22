@@ -72,8 +72,7 @@ mysqli_close($conn);
 
 <br>
 <br></br>
-<form action="/modify_user/user_modify_form.php" method="post" onsubmit="return validarModifyItem();">
-<form method="post" onsubmit="return confirm('¿Quieres editar este item?');">
+<form method="post" onsubmit="return confirm('¿Quieres editar este item?') && validarModifyItem();">
         <label for="nombre"><b>Nombre:</b></label><br>
         <input type="text" id="nombre" name="nombre" value="<?= $row['nombre'] ?>" ><br><br>
 
