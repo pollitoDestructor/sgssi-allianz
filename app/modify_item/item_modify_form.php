@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Allianz Labubu - Info item</title>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/regex.js"></script>
 </head>
 <body>
 
@@ -71,15 +72,16 @@ mysqli_close($conn);
 
 <br>
 <br></br>
+<form action="/modify_user/user_modify_form.php" method="post" onsubmit="return validarModifyItem();">
 <form method="post" onsubmit="return confirm('¿Quieres editar este item?');">
         <label for="nombre"><b>Nombre:</b></label><br>
-        <input type="text" id="nombre" name="nombre" value="<?= $row['nombre'] ?>" required><br><br>
+        <input type="text" id="nombre" name="nombre" value="<?= $row['nombre'] ?>" ><br><br>
 
         <label for="color"><b>Color:</b></label><br>
-        <input type="text" id="color" name="color" value="<?= $row['color'] ?>" required><br><br>
+        <input type="text" id="color" name="color" value="<?= $row['color'] ?>" ><br><br>
         
         <label for="estado"><b>Estado:</b></label><br>
-	<select id="estado" name="estado" required>
+	<select id="estado" name="estado">
 		<option value="">Selecciona un estado</option>
 		<option value="nuevo">Nuevo</option>
 		<option value="usado">Usado</option>
@@ -90,10 +92,10 @@ mysqli_close($conn);
 	</script>
 
         <label for="descr"><b>Descripción:</b></label><br>
-        <input type="text" id="descr" name="descr" value="<?= $row['descr'] ?>" required><br><br>
+        <input type="text" id="descr" name="descr" value="<?= $row['descr'] ?>" ><br><br>
 
         <label for="precio"><b>Precio (€):</b></label><br>
-        <input type="number" step="0.01" name="precio" value="<?= $row['precio'] ?>" required placeholder="0 - 999.99"><br><br>
+        <input type="number" step="0.01" name="precio" value="<?= $row['precio'] ?>" placeholder="0 - 999.99"><br><br>
         <input type="submit" name="editar" value="Modificar item">
 </form>
 

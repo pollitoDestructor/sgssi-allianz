@@ -41,4 +41,34 @@ function validarFormulario() {
                 return false;
             }
             return true;
-        }
+}
+
+function validarModifyItem() {
+            const nombre = document.getElementById("nombre").value.trim();
+            const color = document.getElementById("color").value.trim();
+            const estado = document.getElementById("estado").value;
+            const descr = document.getElementById("descr").value.trim();
+            const precio = document.querySelector("input[name='precio']").value.trim();
+
+            // ============= Todo esto para verificar o validar los campos =============
+            if (!nombre || !color || !estado || !descr || !precio) {
+                alert("Por favor, completa todos los campos.");
+                return false;
+            }
+
+            // ============= Todo esto para verificar el color =============
+            const colorRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+            if (!colorRegex.test(color)) {
+                alert("Color inválido, solo se permiten letras.");
+                return false;
+            }
+
+            // ============= Todo esto para verificar el precio =============
+            const precioNum = parseFloat(precio);
+            if (isNaN(precioNum) || precioNum <= 0) {
+                alert("Precio inválido, debe ser un valor positivo.");
+                return false;
+            }
+
+            return true; // Todo correcto
+}

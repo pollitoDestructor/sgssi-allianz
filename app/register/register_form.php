@@ -74,25 +74,25 @@ mysqli_close($conn);
     <br>
     <form action="register_form.php" method="post" onsubmit="return validarFormulario();">
         <label for="nombre"><b>Nombre:</b></label><br>
-        <input type="text" id="nombre" name="nombre" placeholder="Introduzca su nombre" required><br><br>
+        <input type="text" id="nombre" name="nombre" placeholder="Introduzca su nombre" ><br><br>
 
         <label for="apellidos"><b>Apellidos:</b></label><br>
-        <input type="text" id="apellidos" name="apellidos" placeholder="Introduzca sus apellidos" required><br><br>
+        <input type="text" id="apellidos" name="apellidos" placeholder="Introduzca sus apellidos" ><br><br>
 
         <label for="dni"><b>DNI:</b></label><br>
-        <input type="text" id="dni" name="dni" placeholder="12345678A" required><br><br>
+        <input type="text" id="dni" name="dni" placeholder="12345678A" ><br><br>
 
         <label for="fecha_nac"><b>Fecha de nacimiento:</b></label><br>
-        <input type="date" id="fecha_nac" name="fecha_nac" required><br><br>
+        <input type="date" id="fecha_nac" name="fecha_nac" ><br><br>
 
         <label for="telefono"><b>Teléfono:</b></label><br>
-        <input type="text" id="telefono" name="telefono" placeholder="Ej: 600123456" required><br><br>
+        <input type="text" id="telefono" name="telefono" placeholder="Ej: 600123456" ><br><br>
 
         <label for="email"><b>Email:</b></label><br>
-        <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required><br><br>
+        <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" ><br><br>
 
         <label for="contra"><b>Contraseña:</b></label><br>
-        <input type="password" id="contra" name="contra" placeholder="Introduzca su contraseña" required><br><br>
+        <input type="password" id="contra" name="contra" placeholder="Introduzca su contraseña" ><br><br>
 
         <input type="submit" value="Registrar usuario">
         <input type="reset" value="Borrar">
