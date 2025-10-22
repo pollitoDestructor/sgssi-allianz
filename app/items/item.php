@@ -75,9 +75,9 @@ mysqli_close($conn);
     <input type="hidden" name="id" value="<?php echo $id; ?>">
     <input type="submit" value="Modificar item">
 </form>
-
-<form method="post" onsubmit="return confirm('¿Quieres borrar este item?');">
-    <input type="submit" name="borrar" value="Borrar">
+<form action="../delete_item" method="get">
+    <input type="hidden" name="item" value="<?php echo $id; ?>">
+    <input type="submit" value="Borrar item">
 </form>
 
 <form action="catalogo.php" method="get">
