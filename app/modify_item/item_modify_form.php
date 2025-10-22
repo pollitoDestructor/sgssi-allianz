@@ -39,7 +39,8 @@ if (isset($_POST['editar'])) {
 	$precio = $_POST['precio'];
 	$sql_update = "UPDATE catalogo SET nombre = '$nombre', color = '$color', estado = '$estado', descr = '$descr', precio = '$precio' WHERE id = '$id'";
 	if (mysqli_query($conn, $sql_update)) {
-        echo "<script>alert('Datos modificados correctamente.');</script>";
+	echo "<script>alert('Datos modificados correctamente.'); window.location.href='../items/item.php?id={$id}';</script>"; // Para volver tras modificar al catalogo #TODO
+    	exit;
 	} else {
         echo "<center><p style='color:red;'><b>Error al registrar: " . mysqli_error($conn) . "</b></p></center>";
     }
