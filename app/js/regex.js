@@ -65,10 +65,11 @@ function validarModifyItem() {
 
             // ============= Todo esto para verificar el precio =============
             const precioNum = parseFloat(precio);
-            if (isNaN(precioNum) || precioNum <= 0) {
-                alert("Precio inválido, debe ser un valor positivo.");
-                return false;
+            if (isNaN(precioNum) || precioNum <= 0 || precioNum >= 999.99) {
+              alert("Precio inválido, debe ser un valor positivo y menor que 999.99.");
+              return false;
             }
+
 
             return true; // Todo correcto
 }
