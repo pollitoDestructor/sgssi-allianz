@@ -24,12 +24,6 @@ if (!$conn) {
 // Obtener el id desde la URL, el que pasa catalogo
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Eliminar labubus
-if (isset($_POST['borrar'])) {
-    $id = intval($_GET['id']);  // toma el id desde la URL
-    mysqli_query($conn, "DELETE FROM catalogo WHERE id = $id");
-}
-
 //Editar labubus
 if (isset($_POST['editar'])) {
 	$id = intval($_GET['id']);
