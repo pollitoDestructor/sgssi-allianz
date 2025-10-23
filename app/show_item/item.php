@@ -1,3 +1,4 @@
+<?php //TODO include_once("../sesion_iniciada/comprobar_sesion_iniciada.php"); // Comprobar sesión iniciada ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

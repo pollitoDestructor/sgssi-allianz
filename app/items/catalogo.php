@@ -1,18 +1,4 @@
-<?php
-//Comprobación de la sesión
-session_start();
-// Si no hay sesion iniciada, te redirige al login
-if (!isset($_SESSION['usuario']) && $_SERVER["REQUEST_METHOD"] !== "POST") {
-    header('Location: /login/');
-    exit();
-}
-// Si no hay parámetro GET "user", redirige automáticamente con el DNI de sesión.
-if (!isset($_GET['user']) && $_SERVER["REQUEST_METHOD"] !== "POST") {
-    $dni = $_SESSION['dni'];
-    header("Location: /items?user=" . urlencode($dni));
-    exit;
-}
-?>
+<?php //TODO include_once("../sesion_iniciada/comprobar_sesion_iniciada.php"); // Comprobar sesión iniciada ?>
 
 <!DOCTYPE html>
 <html lang="es">

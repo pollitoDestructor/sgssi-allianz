@@ -1,26 +1,4 @@
-<?php
-session_start();
-
-// Si no hay sesión, redirige al login, no dejará ver los datos del usuario a menos de que haya identificación.
-if (!isset($_SESSION['dni'])) {
-    header("Location: /login/login_form.php");
-    exit;
-}
-
-// Si no hay parámetro GET "user", redirige automáticamente con el DNI de sesión.
-if (!isset($_GET['user'])) {
-    $dni = $_SESSION['dni'];
-    header("Location: /show_user?user=" . urlencode($dni));
-    exit;
-}
-
-// Si el parametro GET "user" es distinto al DNI del usuario actual, redirige al inicio. No se tiene permiso para acceder a esa información.
-if ($_GET['user']!=$_SESSION['dni']) {
-    $dni = $_SESSION['dni'];
-    header("Location: /login/login_form.php");
-    exit;
-}
-?>
+<?php //TODO include_once("../sesion_iniciada/comprobar_sesion_iniciada.php"); // Comprobar sesión iniciada ?>
 <html>
 <head>
     <meta charset="UTF-8">
