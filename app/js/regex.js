@@ -46,7 +46,40 @@ function validarFormulario() {
                 alert("Fecha inválida (formato incorrecto).");
                 return false;
             } else {
-                let dia = parseInt(telefono.substring(0,fecha.indexOf('/')));
+                let dia = parseInt(fecha.substring(0,fecha.indexOf('/')));
+                let mes = parseInt(fecha.substring(fecha.indexOf('/')+1,fecha.lastIndexOf('/')));
+                let ano = parseInt(fecha.lastIndexOf('/')+1));
+                const mes31 = [];
+                const mes30 = [];
+                mes31.push(1,3,5,7,8,10,12);
+                mes30.push(4,6,9,11);
+                if(mes < 1 || mes > 12){
+                    alert("Fecha inválida (mes incorrecto).");
+                    return false;
+                }
+                if(mes31.includes(mes)){
+                    if(dia < 1 || dia > 31){
+                        alert("Fecha inválida (día incorrecto).");
+                        return false;
+                    }
+                } else if(mes30.includes(mes)){
+                    if(dia < 1 || dia > 30){
+                        alert("Fecha inválida (día incorrecto).");
+                        return false;
+                    }
+                } else {
+                    if(ano % 4 === 0 && ano % 100 !== 0){
+                        if(dia < 1 || dia > 29){
+                            alert("Fecha inválida (día incorrecto).");
+                            return false;
+                        }
+                    } else {
+                        if(dia < 1 || dia > 28){
+                            alert("Fecha inválida (día incorrecto).");
+                            return false;
+                        }
+                    }
+                }
             }
             return true;
 }
