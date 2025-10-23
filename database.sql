@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db
--- Tiempo de generación: 22-10-2025 a las 08:43:22
+-- Tiempo de generación: 23-10-2025 a las 18:01:35
 -- Versión del servidor: 10.8.2-MariaDB-1:10.8.2+maria~focal
 -- Versión de PHP: 8.2.27
 
@@ -57,7 +57,7 @@ CREATE TABLE `usuarios` (
   `dni` varchar(9) NOT NULL,
   `nombre` text NOT NULL,
   `apellidos` text NOT NULL,
-  `fecha_nac` date NOT NULL COMMENT 'Fecha de nacimiento',
+  `fecha_nac` varchar(10) NOT NULL COMMENT 'Fecha de nacimiento',
   `email` varchar(100) NOT NULL,
   `telefono` int(9) NOT NULL,
   `contraseña` varchar(128) NOT NULL
@@ -68,7 +68,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`dni`, `nombre`, `apellidos`, `fecha_nac`, `email`, `telefono`, `contraseña`) VALUES
-('12345678Z', 'admin', '.', '1999-01-01', 'admin@gmail.com', 666666666, '$2y$10$w5rT8BbskJ40K2PYy7xxT.T9.3FBvziX9Duyn83hpJXmE4NFLfy2e');
+('12345678Z', 'admin', '.', '01/01/1999', 'admin@gmail.com', 666666666, '$2y$10$w5rT8BbskJ40K2PYy7xxT.T9.3FBvziX9Duyn83hpJXmE4NFLfy2e'),
+('99999999R', 'labubu', '.', '02/02/2000', 'labubu@gmail.com', 611111116, '$2y$10$SpbHFBmkFrAopdrijQAokOP3zMq6Tz8EI1ZIwFptDF0vO2LMUYzVC');
 
 --
 -- Índices para tablas volcadas
