@@ -58,7 +58,7 @@
 	</select><br><br>
         Descripción: <input type="text" name="descripcion" required><br><br>
         Precio (€): <input type="number" step="0.01" name="precio" required placeholder="0 - 999.99"><br><br>
-        <input type="submit" value="Añadir producto">
+        <input type="submit" id="item_add_submit" value="Añadir item">
     </form>
 
     <br>
