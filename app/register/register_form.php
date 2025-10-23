@@ -72,7 +72,7 @@ mysqli_close($conn);
 <div class="box3">
     <h2>Registro de usuario</h2>
     <br>
-    <form action="register_form.php" method="post" onsubmit="return validarFormulario();">
+    <form id="register_form" action="register_form.php" method="post" onsubmit="return validarFormulario();">
         <label for="nombre"><b>Nombre:</b></label><br>
         <input type="text" id="nombre" name="nombre" placeholder="Introduzca su nombre" ><br><br>
 
@@ -94,7 +94,7 @@ mysqli_close($conn);
         <label for="contra"><b>Contraseña:</b></label><br>
         <input type="password" id="contra" name="contra" placeholder="Introduzca su contraseña" ><br><br>
 
-        <input type="submit" value="Registrar usuario">
+        <input id="register_submit" type="submit" value="Registrar usuario">
         <input type="reset" value="Borrar">
     </form>
 </div>

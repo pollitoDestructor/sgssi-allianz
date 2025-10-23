@@ -67,7 +67,7 @@ if (isset($_POST['confirmar'])) {
     <br>
 
     <form method="post" onsubmit="return confirm('¿Seguro que deseas eliminar este item?');">
-        <input type="submit" name="confirmar" value="Sí, eliminar item">
+        <input id="item_delete_submit" type="submit" name="confirmar" value="Sí, eliminar item">
     </form>
 
     <form action="../show_item" method="get" onsubmit="return confirm('¿Deseas cancelar y volver atrás?')">

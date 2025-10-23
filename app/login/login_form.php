@@ -77,7 +77,7 @@
     <h2>Iniciar sesión</h2>
 <br>
 </br>
-    <form action="login_form.php" method="post">
+    <form id="login_form" action="login_form.php" method="post">
         <label for="nombre"><b>Nombre:</b></label><br>
         <input type="text" id="nombre" name="nombre" placeholder="Introduzca su nombre" required><br><br>
 

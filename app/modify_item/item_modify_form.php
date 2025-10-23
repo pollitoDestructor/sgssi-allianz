@@ -67,7 +67,7 @@ mysqli_close($conn);
 
 <br>
 <br></br>
-<form method="post" onsubmit="return confirm('¿Quieres editar este item?') && validarModifyItem();">
+<form id="item_modify_form" method="post" onsubmit="return confirm('¿Quieres editar este item?') && validarModifyItem();">
         <label for="nombre"><b>Nombre:</b></label><br>
         <input type="text" id="nombre" name="nombre" value="<?= $row['nombre'] ?>" ><br><br>
 
@@ -90,7 +90,7 @@ mysqli_close($conn);
 
         <label for="precio"><b>Precio (€):</b></label><br>
         <input type="number" step="0.01" name="precio" value="<?= $row['precio'] ?>" placeholder="0 - 999.99"><br><br>
-        <input type="submit" name="editar" value="Modificar item">
+        <input id="item_modify_submit" type="submit" name="editar" value="Modificar item">
 </form>
 
 <form action="../show_item" method="get" onsubmit="return confirm('¿Quieres cancelar los cambios y volver atrás?')">

@@ -47,7 +47,7 @@
     ?>
 
     <h3>Añadir nuevo producto</h3>
-    <form method="post" action="" onsubmit="validarModifyItem();">
+    <form id="item_add_form" method="post" action="" onsubmit="validarModifyItem();">
         Nombre: <input type="text" name="nombre" required><br><br>
         Color: <input type="text" name="color" required><br><br>
         <label for="estado">Estado:</label>
