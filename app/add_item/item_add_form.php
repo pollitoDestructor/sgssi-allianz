@@ -36,7 +36,7 @@
         $insert = "INSERT INTO catalogo (nombre, color, estado, descr, precio)
                    VALUES ('$nombre', '$color', '$estado', '$descripcion', '$precio')";
         if (mysqli_query($conn, $insert)) {
-            echo "<p>Producto añadido correctamente.</p>";
+            echo "<script>alert('Item añadido correctamente.');</script>";
             echo "<meta http-equiv='refresh' content='0'>";
         } else {
             echo "<p>Error al añadir el producto: " . mysqli_error($conn) . "</p>";
