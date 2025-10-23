@@ -5,6 +5,7 @@ function validarFormulario() {
             const fecha_nac = document.getElementById("fecha_nac").value;
             const telefono = document.getElementById("telefono").value.trim();
             const email = document.getElementById("email").value.trim();
+            const fecha = document.getElementById("fecha").value.trim();
 		
 	    // ============= Todo esto para verificar o validar los campos =============
             if (!nombre || !apellidos || !dni || !fecha_nac || !telefono || !email) {
@@ -13,11 +14,11 @@ function validarFormulario() {
             }
             
             // Regex para DNI
-            const dniRegex = /^[0-9]{8}[A-Z]$/;
+            const dniRegex = /^[0-9]{8}[A-Z]$/;  //Se coge cualquier digito de 0-9 8 veces y luego una letra de la A-Z
             if (!dniRegex.test(dni)) {
                 alert("DNI inválido, formato incorrecto.");
                 return false;
-            } else {
+            } else {    //Si cumple el formato, se comprueba la letra
                 let cadena = "TRWAGMYFPDXBNJZSQVHLCKET";
                 let dniNumeros = parseInt(dni.substring(0, dni.length - 1));
                 let posicion = dniNumeros % (cadena.length - 1);
@@ -28,17 +29,24 @@ function validarFormulario() {
             }
             
 	   // Regex para email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;    //Coge cualquier carácter que no sea una @ 1 o mas veces, luego una @, después otra cadena de 1 o más caracteres que no sean @, un '.' y por último una última cadena de 1 o más sin @
             if (!emailRegex.test(email)) {
                 alert("Correo electrónico inválido.");
                 return false;
             }
             
 	    // Regex para telefono
-            const telefonoRegex = /^[0-9]{9}$/;
+            const telefonoRegex = /^[0-9]{9}$/;        //9 digitos de 0-9
             if (!telefonoRegex.test(telefono)) {
                 alert("Número de teléfono inválido (9 dígitos).");
                 return false;
+            }
+            const fechaRegex = /^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/;
+            if (!fechaRegex.test(tfecha)) {
+                alert("Fecha inválida (formato incorrecto).");
+                return false;
+            } else {
+                let dia = parseInt(telefono.substring(0,fecha.indexOf('/')));
             }
             return true;
 }
@@ -57,7 +65,7 @@ function validarModifyItem() {
             }
 
             // ============= Todo esto para verificar el color =============
-            const colorRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+            const colorRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/; //Cualquier carácter, mayúscula, minúscula o especial
             if (!colorRegex.test(color)) {
                 alert("Color inválido, solo se permiten letras.");
                 return false;
