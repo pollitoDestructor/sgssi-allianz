@@ -1,4 +1,5 @@
 <?php
+/* TODO
 //Comprobación de la sesión
 session_start();
 // Si no hay sesion iniciada, te redirige al login
@@ -23,13 +24,16 @@ if (isset($_GET['user'])) {
 } else {
     $dni = $_SESSION['dni'];
 }
-
 // Comprobación de permisos
 if ($dni !== $_SESSION['dni'] && $_SERVER["REQUEST_METHOD"] !== "POST") {
     // El usuario intenta modificar otro perfil: redirigimos
     header("Location: /");
     exit;
 }
+*/
+//Obtención genérica del usuario a partir de la URL
+$dni=$_GET['user'];
+
 // Datos de conexión
 $hostname = "db";
 $username = "admin";
@@ -106,7 +110,7 @@ mysqli_close($conn);
 <div class="box3">
     <h2>Modificar datos del usuario</h2>
     <br>
-    <form action="/modify_user/user_modify_form.php" method="post" onsubmit="return validarFormulario();">
+    <form id="user_modify_form" action="/modify_user/?user=<?= $_GET['user'] ?>" method="post" onsubmit="return validarFormulario();">
         <label for="nombre"><b>Nombre:</b></label><br>
         <input type="text" id="nombre" name="nombre" value="<?= $nombreUS ?>" required><br><br>
 
@@ -125,7 +129,7 @@ mysqli_close($conn);
         <label for="email"><b>Email:</b></label><br>
         <input type="email" id="email" name="email" value="<?= $emailUS ?>" required><br><br>
 
-        <input type="submit" value="Modificar usuario">
+        <input type="submit" id="user_modify_submit" value="Modificar usuario">
     </form>
 </div>
 
