@@ -83,7 +83,7 @@ mysqli_close($conn);
         <input type="text" id="dni" name="dni" placeholder="12345678A" ><br><br>
 
         <label for="fecha_nac"><b>Fecha de nacimiento:</b></label><br>
-        <input type="date" id="fecha_nac" name="fecha_nac" ><br><br>
+        <input type="text" id="fecha_nac" name="fecha_nac" placeholder="dd/mm/aaaa" ><br><br>
 
         <label for="telefono"><b>Teléfono:</b></label><br>
         <input type="text" id="telefono" name="telefono" placeholder="Ej: 600123456" ><br><br>
