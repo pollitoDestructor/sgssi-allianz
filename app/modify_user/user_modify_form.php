@@ -112,22 +112,22 @@ mysqli_close($conn);
     <br>
     <form id="user_modify_form" action="/modify_user/?user=<?= $_GET['user'] ?>" method="post" onsubmit="return validarFormulario();">
         <label for="nombre"><b>Nombre:</b></label><br>
-        <input type="text" id="nombre" name="nombre" value="<?= $nombreUS ?>" required><br><br>
+        <input type="text" id="nombre" name="nombre" value="<?= $nombreUS ?>" ><br><br>
 
         <label for="apellidos"><b>Apellidos:</b></label><br>
-        <input type="text" id="apellidos" name="apellidos" value="<?= $apellidosUS ?>" required><br><br>
+        <input type="text" id="apellidos" name="apellidos" value="<?= $apellidosUS ?>" ><br><br>
 
         <label for="dni"><b>DNI:</b></label><br>
-        <input type="text" id="dni" name="dni" value="<?= $dniUS ?>" required><br><br>
+        <input type="text" id="dni" name="dni" value="<?= $dniUS ?>" ><br><br>
 
         <label for="fecha_nac"><b>Fecha de nacimiento:</b></label><br>
-        <input type="date" id="fecha_nac" name="fecha_nac" value="<?= $fecha_nacUS ?>" required><br><br>
+        <input type="date" id="fecha_nac" name="fecha_nac" value="<?= $fecha_nacUS ?>" ><br><br>
 
         <label for="telefono"><b>Teléfono:</b></label><br>
-        <input type="text" id="telefono" name="telefono" value="<?= $telefonoUS ?>" required><br><br>
+        <input type="text" id="telefono" name="telefono" value="<?= $telefonoUS ?>" ><br><br>
 
         <label for="email"><b>Email:</b></label><br>
-        <input type="email" id="email" name="email" value="<?= $emailUS ?>" required><br><br>
+        <input type="email" id="email" name="email" value="<?= $emailUS ?>" ><br><br>
 
         <input type="submit" id="user_modify_submit" value="Modificar usuario">
     </form>
