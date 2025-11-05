@@ -1,4 +1,4 @@
-<?php //TODO include_once("../sesion_iniciada/comprobar_sesion_iniciada.php"); // Comprobar sesión iniciada ?>
+<?php include_once("../sesion_iniciada/comprobar_sesion_iniciada.php"); // Comprobar sesión iniciada ?>
 <html>
 <head>
     <meta charset="UTF-8">

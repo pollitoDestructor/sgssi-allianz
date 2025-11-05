@@ -1,5 +1,4 @@
 <?php
-/* TODO
 //Comprobación de la sesión
 session_start();
 // Si no hay sesion iniciada, te redirige al login
@@ -30,7 +29,6 @@ if ($dni !== $_SESSION['dni'] && $_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: /");
     exit;
 }
-*/
 //Obtención genérica del usuario a partir de la URL
 $dni=$_GET['user'];
 
