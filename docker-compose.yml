@@ -10,6 +10,7 @@ services:
       command: bash -c "a2enmod rewrite && apache2-foreground"
       volumes:
         - ./app:/var/www/html/
+        - ./config/custom.php.ini:/etc/php5/apache2/conf.d/custom.php.ini
 
    db:
      image: mariadb:10.8.2
