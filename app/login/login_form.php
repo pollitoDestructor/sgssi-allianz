@@ -1,4 +1,8 @@
 <?php
+  // Configurar la cookie de sesión
+  ini_set('session.cookie_samesite', 'Lax');   // Samesite
+  //ini_set('session.cookie_secure', '1');   // si usamos HTTPS, mayor seguridad
+  ini_set('session.cookie_httponly', '1');   // evita acceso por JavaScript
   //Activar el manejo de sesiones
   session_start();
   // Si ya hay sesión, no dejar volver a logearse (Ni accediendo a través de la URL)

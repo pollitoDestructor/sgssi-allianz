@@ -1,6 +1,19 @@
 <?php
 // Recuperar datos de la sesion (si no se ha iniciado sesion aun, tambien es util!) 
 session_start();
+if (PHP_VERSION_ID < 70300) {
+    $params = session_get_cookie_params();
+    $sessionId = session_id();
+    $cookie = sprintf(
+        'PHPSESSID=%s; Path=%s; HttpOnly; SameSite=Lax',
+        $sessionId,
+        $params['path']
+    );
+    if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+        $cookie .= '; Secure';
+    }
+    header('Set-Cookie: ' . $cookie, false);
+}
 ?>
 
 <!DOCTYPE html>

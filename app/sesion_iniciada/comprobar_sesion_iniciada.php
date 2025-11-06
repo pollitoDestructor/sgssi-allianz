@@ -1,4 +1,12 @@
 <?php
+session_set_cookie_params([
+    'lifetime' => 0,       // La cookie dura hasta que se cierra el navegador
+    'path' => '/',
+    'domain' => '',        // Déjalo vacío o ajusta tu dominio si es necesario
+    'secure' => false,     // Cambia a true si usas HTTPS
+    'httponly' => true,    // Evita acceso por JavaScript
+    'samesite' => 'Lax'    // Puede ser 'Strict', 'Lax' o 'None'
+]);
 session_start();
 // Si no hay sesion iniciada, te redirige al login
 if (!isset($_SESSION['usuario']) && $_SERVER["REQUEST_METHOD"] !== "POST") {
