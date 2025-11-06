@@ -11,6 +11,7 @@ services:
       volumes:
         - ./app:/var/www/html/
         - ./config/custom.php.ini:/etc/php5/apache2/conf.d/custom.php.ini
+        - ./config/99-custom.ini:/usr/local/etc/php/conf.d/99-custom.ini
 
    db:
      image: mariadb:10.8.2
