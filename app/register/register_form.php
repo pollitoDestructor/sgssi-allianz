@@ -1,8 +1,7 @@
 <?php
-// Evitar clickjacking
+header("Content-Security-Policy: default-src 'self'; script-src 'self' https://code.jquery.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
 header("X-Frame-Options: SAMEORIGIN");
 header('X-Content-Type-Options: nosniff');
-header("Content-Security-Policy: frame-ancestors 'self'");
 
 // Eliminar información de versión
 header_remove("X-Powered-By");
