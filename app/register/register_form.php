@@ -1,6 +1,14 @@
 <?php
+header_remove("X-Powered-By");
   //Comprobación de la sesión
   session_start();
+  
+  	//TODO Crear token CSRF si no existe
+	if (empty($_SESSION['csrf_token'])) {
+	    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+	}
+	$csrf_token = $_SESSION['csrf_token'];
+  
   // Si ya hay sesión, no dejar registrarse
   if (isset($_SESSION['usuario'])) {
     header('Location: ../index.php');
@@ -22,6 +30,12 @@ if (!$conn) {
 
 // Si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+	//TODO
+	if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+		die('Error: token CSRF inválido');
+	}
+
     // Obtener y sanitizar datos
     $nombre = mysqli_real_escape_string($conn, $_POST['nombre']);
     $apellidos = mysqli_real_escape_string($conn, $_POST['apellidos']);
@@ -73,6 +87,8 @@ mysqli_close($conn);
     <h2>Registro de usuario</h2>
     <br>
     <form id="register_form" action="register_form.php" method="post" onsubmit="return validarFormulario();">
+    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
+    
         <label for="nombre"><b>Nombre:</b></label><br>
         <input type="text" id="nombre" name="nombre" placeholder="Introduzca su nombre" ><br><br>
 

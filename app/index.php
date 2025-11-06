@@ -1,4 +1,5 @@
 <?php
+header_remove("X-Powered-By");
 // Recuperar datos de la sesion (si no se ha iniciado sesion aun, tambien es util!) 
 session_start();
 ?>
