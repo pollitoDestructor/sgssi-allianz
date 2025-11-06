@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $contra = $_POST['contra'];
 
     $sql_check = "SELECT * FROM usuarios WHERE nombre = '$nombre' OR email = '$email'";
-    $resultado = mysqli_query($conn, $sql_check);
+    $resultado = mysqli_query($conn, $sql_check) or die('Error al conectarse con la base de datos.');
 
     if (mysqli_num_rows($resultado) > 0) {
         echo "<center><p style='color:red;'><b>El usuario o el correo ya existe. Prueba con otro.</b></p></center>";
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $sql_insert = "INSERT INTO usuarios (nombre, apellidos, dni, fecha_nac, telefono, email, contraseña) 
                        VALUES ('$nombre', '$apellidos', '$dni', '$fecha_nac', '$telefono', '$email', '$hash')";
 
-        if (mysqli_query($conn, $sql_insert)) {
+        if (mysqli_query($conn, $sql_insert) or die('Error al conectarse con la base de datos.')) {
             echo "<center><p><b>Usuario registrado correctamente.</b></p></center>";
         } else {
             echo "<center><p style='color:red;'><b>Error al registrar usuario.</b></p></center>";
