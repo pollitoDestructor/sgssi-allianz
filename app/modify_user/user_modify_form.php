@@ -1,4 +1,5 @@
 <?php
+header('X-Content-Type-Options: nosniff');
 //Comprobación de la sesión
 session_start();
 // Si no hay sesion iniciada, te redirige al login

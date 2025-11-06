@@ -1,69 +1,72 @@
 <?php
-  // Configurar la cookie de sesión
-  ini_set('session.cookie_samesite', 'Lax');   // Samesite
-  //ini_set('session.cookie_secure', '1');   // si usamos HTTPS, mayor seguridad
-  ini_set('session.cookie_httponly', '1');   // evita acceso por JavaScript
-  //Activar el manejo de sesiones
-  session_start();
-  // Si ya hay sesión, no dejar volver a logearse (Ni accediendo a través de la URL)
-  if (isset($_SESSION['usuario'])) {
+// Evitar clickjacking
+header("X-Frame-Options: SAMEORIGIN");
+header('X-Content-Type-Options: nosniff');
+header("Content-Security-Policy: frame-ancestors 'self'");
+
+// Eliminar información de versión
+header_remove("X-Powered-By");
+
+// Activar sesiones
+session_start();
+
+// Crear token CSRF si no existe
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$csrf_token = $_SESSION['csrf_token'];
+
+// Si ya hay sesión, redirigir
+if (isset($_SESSION['usuario'])) {
+>>>>>>> 469c6485dc55aaa0c510146b111be93bc1fa877a
     header('Location: ../index.php');
     exit();
-  }
-  // Datos de conexión
-  $hostname = "db";
-  $username = "admin";
-  $password = "test";
-  $db = "database";
+}
 
-  $conn = mysqli_connect($hostname, $username, $password, $db);
+// Datos de conexión
+$hostname = "db";
+$username = "admin";
+$password = "test";
+$db = "database";
 
-  if (!$conn) {
-      die("<center><p style='color:red;'>Error de conexión: " . mysqli_connect_error() . "</p></center>");
-  }
+$conn = mysqli_connect($hostname, $username, $password, $db);
+if (!$conn) {
+    die("<center><p style='color:red;'>Error de conexión: " . mysqli_connect_error() . "</p></center>");
+}
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $nom = $_POST['nombre'];
-      $contra = $_POST['contra'];
+// Procesar login
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('Error: token CSRF inválido');
+    }
 
-      // Consultar usuario
-      $query = "SELECT * FROM usuarios WHERE nombre = '$nom'";
-      $con = mysqli_query($conn, $query) or die(mysqli_error($conn));
-      $row = mysqli_fetch_array($con);
+    $nom = $_POST['nombre'];
+    $contra = $_POST['contra'];
 
-      if ($row) {
-          if (password_verify($contra, $row['contraseña'])) {
-              //Guardar los datos de la sesion
-              $_SESSION['usuario'] = $row['nombre'];
-              $_SESSION['dni'] = $row['dni'];
-              // Redirigir a index.php al iniciar sesión
-       	      header('Location: ../index.php');
-       	      exit();
-          } else {
-              echo "<center><p style='color:red;'><b>Contraseña incorrecta.</b></p></center>";
-          }
-      } else {
-          echo "<center><p style='color:red;'><b>Usuario no encontrado.</b></p></center>";
-      }
+    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE nombre = ?");
+    $stmt->bind_param("s", $nom);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
 
-      // Mostrar información (como en el original)
-      echo "
-      <center>
-      <table border='1' cellpadding='5'>
-        <tr>
-          <th>ID</th><th>Nombre</th><th>Contraseña</th>
-        </tr>
-        <tr>
-          <td>aaaaa</td>
-          <td>{$row['nombre']}</td>
-          <td>{$row['contraseña']}</td>
-        </tr>
-      </table>
-      </center>";
-  }
+    if ($row) {
+        if (password_verify($contra, $row['contraseña'])) {
+            $_SESSION['usuario'] = $row['nombre'];
+            $_SESSION['dni'] = $row['dni'];
+
+            session_regenerate_id(true);
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+            header('Location: ../index.php');
+            exit();
+        } else {
+            echo "<center><p style='color:red;'><b>Contraseña incorrecta.</b></p></center>";
+        }
+    } else {
+        echo "<center><p style='color:red;'><b>Usuario no encontrado.</b></p></center>";
+    }
+}
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -74,14 +77,11 @@
 </head>
 <body>
 
-<br><br>
-<br><br><br>
-
 <div class="box2">
     <h2>Iniciar sesión</h2>
-<br>
-</br>
     <form id="login_form" action="login_form.php" method="post">
+        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
+
         <label for="nombre"><b>Nombre:</b></label><br>
         <input type="text" id="nombre" name="nombre" placeholder="Introduzca su nombre" required><br><br>
 
@@ -91,18 +91,14 @@
         <input id="login_submit" type="submit" value="Enviar">
         <input type="reset" value="Borrar">
     </form>
-
 </div>
-    <br>
-    <form action="../index.php" method="get">
-    	<input type="submit" value="Volver al inicio">
-    </form>
-    <br>
-</br>
 
+<br>
+<form action="../index.php" method="get">
+    <input type="submit" value="Volver al inicio">
+</form>
 
-<br><br><br><br>
-<?php include_once('../header_and_footer/footer.php'); //Para el footer  ?>
-
+<?php include_once('../header_and_footer/footer.php'); ?>
 </body>
 </html>
+

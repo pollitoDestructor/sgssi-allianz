@@ -1,4 +1,5 @@
 <?php
+header('X-Content-Type-Options: nosniff');
 session_start();
 
 // Vaciar todas las variables de sesión
