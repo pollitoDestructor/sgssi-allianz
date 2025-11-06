@@ -9,6 +9,7 @@ header_remove("X-Powered-By");
 
 // Recuperar datos de la sesión
 session_start();
+//Atributo samesite y hhtponly activado
 if (PHP_VERSION_ID < 70300) {
     $params = session_get_cookie_params();
     $sessionId = session_id();

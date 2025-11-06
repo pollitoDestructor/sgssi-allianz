@@ -1,6 +1,20 @@
 <?php
 header('X-Content-Type-Options: nosniff');
 session_start();
+//Atributo samesite y hhtponly activado
+if (PHP_VERSION_ID < 70300) {
+    $params = session_get_cookie_params();
+    $sessionId = session_id();
+    $cookie = sprintf(
+        'PHPSESSID=%s; Path=%s; HttpOnly; SameSite=Lax',
+        $sessionId,
+        $params['path']
+    );
+    if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+        $cookie .= '; Secure';
+    }
+    header('Set-Cookie: ' . $cookie, false);
+}
 
 // Vaciar todas las variables de sesión
 $_SESSION = array();

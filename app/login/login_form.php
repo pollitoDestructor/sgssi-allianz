@@ -9,6 +9,20 @@ header_remove("X-Powered-By");
 
 // Activar sesiones
 session_start();
+//Atributo samesite y hhtponly activado
+if (PHP_VERSION_ID < 70300) {
+    $params = session_get_cookie_params();
+    $sessionId = session_id();
+    $cookie = sprintf(
+        'PHPSESSID=%s; Path=%s; HttpOnly; SameSite=Lax',
+        $sessionId,
+        $params['path']
+    );
+    if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
+        $cookie .= '; Secure';
+    }
+    header('Set-Cookie: ' . $cookie, false);
+}
 
 // Crear token CSRF si no existe
 if (empty($_SESSION['csrf_token'])) {
@@ -18,7 +32,6 @@ $csrf_token = $_SESSION['csrf_token'];
 
 // Si ya hay sesión, redirigir
 if (isset($_SESSION['usuario'])) {
->>>>>>> 469c6485dc55aaa0c510146b111be93bc1fa877a
     header('Location: ../index.php');
     exit();
 }
