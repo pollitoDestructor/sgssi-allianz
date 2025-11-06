@@ -1,6 +1,3 @@
-<?php
-header('X-Content-Type-Options: nosniff');
-?>
 <footer class="footer">
     <center>
         <hr size="2" color="black">
