@@ -8,7 +8,7 @@ function validarFormulario() {
             const fecha = document.getElementById("fecha").value.trim();
             const contra = document.getElementById("contra").value.trim();
 		
-	    // ============= Todo esto para verificar o validar los campos =============
+	    // ============= Esto para verificar o validar los campos =============
             if (!nombre || !apellidos || !dni || !fecha_nac || !telefono || !email || !contra) {
                 alert("Por favor, completa todos los campos.");
                 return false;
@@ -111,20 +111,20 @@ function validarModifyItem() {
             const descr = document.getElementById("descr").value.trim();
             const precio = document.querySelector("input[name='precio']").value.trim();
 
-            // ============= Todo esto para verificar o validar los campos =============
+            // ============= Esto para verificar o validar los campos =============
             if (!nombre || !color || !estado || !descr || !precio) {
                 alert("Por favor, completa todos los campos.");
                 return false;
             }
 
-            // ============= Todo esto para verificar el color =============
+            // ============= Esto para verificar el color =============
             const colorRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/; //Cualquier carácter, mayúscula, minúscula o especial
             if (!colorRegex.test(color)) {
                 alert("Color inválido, solo se permiten letras.");
                 return false;
             }
 
-            // ============= Todo esto para verificar el precio =============
+            // ============= Esto para verificar el precio =============
             const precioNum = parseFloat(precio);
             if (isNaN(precioNum) || precioNum <= 0 || precioNum >= 999.99) {
               alert("Precio inválido, debe ser un valor positivo y menor que 999.99.");
@@ -132,5 +132,5 @@ function validarModifyItem() {
             }
 
 
-            return true; // Todo correcto
+            return true; // Correcto
 }
