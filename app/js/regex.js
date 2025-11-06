@@ -6,9 +6,10 @@ function validarFormulario() {
             const telefono = document.getElementById("telefono").value.trim();
             const email = document.getElementById("email").value.trim();
             const fecha = document.getElementById("fecha").value.trim();
+            const contra = document.getElementById("contra").value.trim();
 		
 	    // ============= Todo esto para verificar o validar los campos =============
-            if (!nombre || !apellidos || !dni || !fecha_nac || !telefono || !email) {
+            if (!nombre || !apellidos || !dni || !fecha_nac || !telefono || !email || !contra) {
                 alert("Por favor, completa todos los campos.");
                 return false;
             }
@@ -41,8 +42,27 @@ function validarFormulario() {
                 alert("Número de teléfono inválido (9 dígitos).");
                 return false;
             }
+            
+        //Regex para contraseña
+            const contraLengthRegex = /^.{10,}$/;           //10 caracteres o más
+            if (!contraLengthRegex.test(contra)) { 
+                alert("La contraseña debe tener al menos 10 caracteres.");
+                return false;
+            } 
+            const numerosRegex = /.*\d.*/                   //Contenga al menos un número
+            if (!numerosRegex.test(contra)) {
+                alert("La contraseña debe contener al menos un número.");
+                return false;
+            }
+            const caracterEspecialRegex = /.*[^a-zA-Z0-9].*/    //Contenga al menos un carácter especial
+            if (!caracterEspecialRegex.test(contra)) {
+                alert("La contraseña debe contener al menos un carácter especial.");
+                return false;
+            }
+            
+        // Regex para fecha
             const fechaRegex = /^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/;
-            if (!fechaRegex.test(tfecha)) {
+            if (!fechaRegex.test(fecha)) {
                 alert("Fecha inválida (formato incorrecto).");
                 return false;
             } else {

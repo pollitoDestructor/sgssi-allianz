@@ -1,5 +1,4 @@
 <?php
-header('X-Content-Type-Options: nosniff');
 //Comprobación de la sesión
 session_start();
 // Si no hay sesion iniciada, te redirige al login
@@ -58,6 +57,7 @@ if (!$conn) {
       $fecha_nacUS = $row['fecha_nac'];
       $telefonoUS = $row['telefono'];
       $emailUS = $row['email'];
+      $contra = $row['contraseña'];
 
 // Si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -68,9 +68,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fecha_nac = mysqli_real_escape_string($conn, $_POST['fecha_nac']);
     $telefono = mysqli_real_escape_string($conn, $_POST['telefono']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $contra = mysqli_real_escape_string($conn, $_POST['contra']);
 
     // Edita el usuario
-    $sql_update = "UPDATE usuarios SET nombre = '$nombre', apellidos = '$apellidos', dni = '$dni', fecha_nac = '$fecha_nac', telefono = '$telefono', email = '$email' WHERE dni = '$dniUS'";
+    $sql_update = "UPDATE usuarios SET nombre = '$nombre', apellidos = '$apellidos', dni = '$dni', fecha_nac = '$fecha_nac', telefono = '$telefono', email = '$email', contraseña = '$contra' WHERE dni = '$dniUS'";
     if (mysqli_query($conn, $sql_update)) {
         echo "<center><p><b>Datos modificados correctamente.</b></p></center>";
         $_SESSION['usuario'] = $nombre; //Actualizar los datos de sesión
@@ -86,6 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	$fecha_nacUS = $row['fecha_nac'];
 	$telefonoUS = $row['telefono'];
 	$emailUS = $row['email'];
+	$contra = $row['contra'];
+	
     } else {
         echo "<center><p style='color:red;'><b>Error al registrar: " . mysqli_error($conn) . "</b></p></center>";
     }
@@ -127,6 +130,9 @@ mysqli_close($conn);
 
         <label for="email"><b>Email:</b></label><br>
         <input type="email" id="email" name="email" value="<?= $emailUS ?>" ><br><br>
+        
+        <label for="contra"><b>Contraseña:</b></label><br>
+        <input type="text" id="contra" name="contra" placeholder="Introduce una contraseña" ><br><br>
 
         <input type="submit" id="user_modify_submit" value="Modificar usuario">
     </form>
