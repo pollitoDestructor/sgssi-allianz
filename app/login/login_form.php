@@ -21,7 +21,7 @@ if (PHP_VERSION_ID < 70300) {
     if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
         $cookie .= '; Secure';
     }
-    header('Set-Cookie: ' . $cookie, false);
+    header('Set-Cookie: ' . $cookie, true);
 }
 
 // Crear token CSRF si no existe

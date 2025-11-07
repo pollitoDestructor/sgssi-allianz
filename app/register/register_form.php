@@ -20,7 +20,7 @@ if (PHP_VERSION_ID < 70300) {
     if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
         $cookie .= '; Secure';
     }
-    header('Set-Cookie: ' . $cookie, false);
+    header('Set-Cookie: ' . $cookie, true);
 }
 // Crear token CSRF si no existe
 if (empty($_SESSION['csrf_token'])) {
@@ -54,7 +54,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre = mysqli_real_escape_string($conn, $_POST['nombre']);
     $apellidos = mysqli_real_escape_string($conn, $_POST['apellidos']);
     $dni = mysqli_real_escape_string($conn, $_POST['dni']);
-    $fecha_nac = mysqli_real_escape_string($conn, $_POST['fecha_nac']);
+    $fecha_original = trim($_POST['fecha_nac']);
+    $fecha_obj = DateTime::createFromFormat('d/m/Y', $fecha_original);
+    if ($fecha_obj === false) {
+       die("<center><p style='color:red;'><b>Error: formato de fecha inválido.</b></p></center>");
+    }
+    // Convertir al formato que entiende mysqli (yyyy-mm-dd)
+    $fecha_nac = $fecha_obj->format('Y-m-d');
     $telefono = mysqli_real_escape_string($conn, $_POST['telefono']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $contra = $_POST['contra'];
