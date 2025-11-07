@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $sql_insert = "INSERT INTO usuarios (nombre, apellidos, dni, fecha_nac, telefono, email, contraseña) 
                        VALUES ('$nombre', '$apellidos', '$dni', '$fecha_nac', '$telefono', '$email', '$hash')";
 
-        if (mysqli_query($conn, $sql_insert) or die('Error al conectarse con la base de datos.')) {
+        if (mysqli_query($conn, $sql_insert)) {
             echo "<center><p><b>Usuario registrado correctamente.</b></p></center>";
         } else {
             echo "<center><p style='color:red;'><b>Error al registrar usuario.</b></p></center>";
