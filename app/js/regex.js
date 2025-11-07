@@ -59,6 +59,16 @@ function validarFormulario() {
                 alert("La contraseña debe contener al menos un carácter especial.");
                 return false;
             }
+            const mayusculaRegex = /.*[A-Z]+.*/    //Contenga al menos una mayuscula
+            if (!mayusculaRegex.test(contra)) {
+                alert("La contraseña debe contener al menos una mayuscula.");
+                return false;
+            }
+            const minusculaRegex = /.*[a-z]+.*/    //Contenga al menos una minuscula
+            if (!minusculaRegex.test(contra)) {
+                alert("La contraseña debe contener al menos una minuscula.");
+                return false;
+            }
             
         // Regex para fecha
             const fechaRegex = /^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/;
