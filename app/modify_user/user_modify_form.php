@@ -69,9 +69,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $telefono = mysqli_real_escape_string($conn, $_POST['telefono']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $contra = mysqli_real_escape_string($conn, $_POST['contra']);
-
+    //hash
+    $hash = password_hash($contra, PASSWORD_DEFAULT);
+    
     // Edita el usuario
-    $sql_update = "UPDATE usuarios SET nombre = '$nombre', apellidos = '$apellidos', dni = '$dni', fecha_nac = '$fecha_nac', telefono = '$telefono', email = '$email', contraseña = '$contra' WHERE dni = '$dniUS'";
+    $sql_update = "UPDATE usuarios SET nombre = '$nombre', apellidos = '$apellidos', dni = '$dni', fecha_nac = '$fecha_nac', telefono = '$telefono', email = '$email', contraseña = '$hash' WHERE dni = '$dniUS'";
     if (mysqli_query($conn, $sql_update)) {
         echo "<center><p><b>Datos modificados correctamente.</b></p></center>";
         $_SESSION['usuario'] = $nombre; //Actualizar los datos de sesión
@@ -123,10 +125,10 @@ mysqli_close($conn);
         <input type="text" id="dni" name="dni" value="<?= $dniUS ?>" ><br><br>
 
         <label for="fecha_nac"><b>Fecha de nacimiento:</b></label><br>
-        <input type="date" id="fecha_nac" name="fecha_nac" value="<?= $fecha_nacUS ?>" ><br><br>
+        <input type="text" id="fecha_nac" name="fecha_nac" value="<?= $fecha_nacUS ?>"><br><br>
 
         <label for="telefono"><b>Teléfono:</b></label><br>
-        <input type="text" id="telefono" name="telefono" value="<?= $telefonoUS ?>" ><br><br>
+        <input type="text" id="telefono" name="telefono" value="<?= $telefonoUS ?>"><br><br>
 
         <label for="email"><b>Email:</b></label><br>
         <input type="email" id="email" name="email" value="<?= $emailUS ?>" ><br><br>

@@ -2,14 +2,13 @@ function validarFormulario() {
             const nombre = document.getElementById("nombre").value.trim();
             const apellidos = document.getElementById("apellidos").value.trim();
             const dni = document.getElementById("dni").value.trim();
-            const fecha_nac = document.getElementById("fecha_nac").value;
+            const fecha = document.getElementById("fecha_nac").value;
             const telefono = document.getElementById("telefono").value.trim();
             const email = document.getElementById("email").value.trim();
-            const fecha = document.getElementById("fecha").value.trim();
             const contra = document.getElementById("contra").value.trim();
 		
 	    // ============= Esto para verificar o validar los campos =============
-            if (!nombre || !apellidos || !dni || !fecha_nac || !telefono || !email || !contra) {
+            if (!nombre || !apellidos || !dni || !fecha || !telefono || !email || !contra) {
                 alert("Por favor, completa todos los campos.");
                 return false;
             }
@@ -78,7 +77,7 @@ function validarFormulario() {
             } else {
                 let dia = parseInt(fecha.substring(0,fecha.indexOf('/')));
                 let mes = parseInt(fecha.substring(fecha.indexOf('/')+1,fecha.lastIndexOf('/')));
-                let ano = parseInt(fecha.lastIndexOf('/')+1));
+                let ano = parseInt(fecha.lastIndexOf('/')+1);
                 const mes31 = [];
                 const mes30 = [];
                 mes31.push(1,3,5,7,8,10,12);
