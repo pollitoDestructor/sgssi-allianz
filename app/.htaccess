@@ -19,3 +19,9 @@ RewriteCond %{QUERY_STRING} ^user={(.*)}$
 RewriteRule ^modify_user$ modificar_form/user_modify_form\.php?id=%1 [L]
 RewriteCond %{QUERY_STRING} ^user={(.*)}$ 
 RewriteRule ^show_user$ show_user/show_user\.php?user=%1 [L]
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
