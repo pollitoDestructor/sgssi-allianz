@@ -143,3 +143,15 @@ function validarModifyItem() {
 
             return true; // Correcto
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("register_form");
+    if (form) {
+        form.addEventListener("submit", function(event) {
+            if (!validarFormulario()) {
+                event.preventDefault();
+            }
+        });
+    }
+});
+
